@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for post in posts %}
+
+    <div class="post" >
+        <div class="post-photo">
+            <img src="/media/{{ post.photo }}" alt="">
+        </div>
+        <div class="post-comment">
+            {% for i in post.postcomment_set.all %}
+                <p>{{ i.content }}</p>
+            {% endfor %}
+        </div>
+        <div class="post-form">
+            <form action="{% url 'comment_add' pk=post.pk %}" method="post">
+                {% csrf_token %}
+                <input class="form-control" name="comment" type="text" placeholder="댓글 달기...">
+            </form>
+        </div>
+    </div>
+
+{% endfor %}
+{% endblock %}

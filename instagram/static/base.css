@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    height: 77px;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-wrapper {
+    padding: calc(77px/4) 0;
+    height: 50%;
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+    text-align: center;
+}
+
+
+.insta-icon {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.insta-logo {
+    height: 40px;
+    padding-left: 10px;
+    border-left: 1px solid rgb(146, 146, 146);
+}
+
+.contents {
+    width: 500px;
+    margin: 0 auto;
+    padding-top: 60px;
+}
+
+.post{
+    margin-bottom: 60px;
+}
+
+.post .post-photo {
+    float: left;
+}
+
+.post .post-photo img {
+    width: 500px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.post .post-comment {
+    width: 500px;
+}
+
+.post-add {
+    position: fixed;
+    height: 30px;
+    width: 30px;
+    right: 50px;
+    bottom: 50px;
+}
+
+.post-add img {
+    height: 50px;
+    width: 50px;
+}

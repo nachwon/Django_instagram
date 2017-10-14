@@ -15,6 +15,6 @@ class PostComment(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Comment {self.pk}'
+        return f'Post {self.post.pk} - Comment {self.pk}'
 
 
