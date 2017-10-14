@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect
 
 from post.models import Post, PostComment
@@ -19,11 +20,17 @@ def post_add(request):
         photo = request.FILES['post-photo']
         content = request.POST['content']
         Post.objects.create(photo=photo, content=content)
-
         return redirect(post_list)
 
 
-def post_delete(request):
+def post_delete(request, pk):
+    post = Post.objects.get(pk=pk)
+    post.delete()
+    os.remove(f'media/{post.photo.name}')
+    return redirect(post_list)
+
+
+def post_edit(request, pk):
     pass
 
 

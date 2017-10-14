@@ -5,7 +5,7 @@
 
     <div class="post">
         <div class="post-header">
-            <p><strong>Author name comes here</strong><a class="post-delete" href="">DELETE</a></p>
+            <p><strong>Author name comes here</strong><a class="post-delete" href="{% url 'post_delete' pk=post.pk %}">DELETE</a></p>
         </div>
         <div class="post-photo">
             <img src="/media/{{ post.photo }}" alt="">
@@ -14,7 +14,7 @@
             <div class="buttons">
                 <ul>
                     <li><a href=""><div class="like-button"></div></a></li>
-                    <li><a href="#comment-input"><div class="comment-button"></div></a></li>
+                    <li><a href="#comment-input-{{ post.pk }}"><div class="comment-button"></div></a></li>
                 </ul>
             </div>
             <div class="likes">
@@ -41,7 +41,7 @@
                 <section>
                     <form action="{% url 'comment_add' pk=post.pk %}" method="post">
                         {% csrf_token %}
-                        <input id="comment-input" class="comment-input" name="comment" type="text" placeholder="댓글 달기...">
+                        <input id="comment-input-{{ post.pk }}" class="comment-input" name="comment" type="text" placeholder="댓글 달기...">
                     </form>
                     <a href=""><div class="options"></div></a>
                 </section>
