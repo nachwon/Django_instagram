@@ -3,20 +3,49 @@
 {% block content %}
 {% for post in posts %}
 
-    <div class="post" >
+    <div class="post">
+        <div class="post-header">
+            <p><strong>Author name comes here</strong><a class="post-delete" href="">DELETE</a></p>
+        </div>
         <div class="post-photo">
             <img src="/media/{{ post.photo }}" alt="">
         </div>
-        <div class="post-comment">
-            {% for i in post.postcomment_set.all %}
-                <p>{{ i.content }}</p>
-            {% endfor %}
-        </div>
-        <div class="post-form">
-            <form action="{% url 'comment_add' pk=post.pk %}" method="post">
-                {% csrf_token %}
-                <input class="form-control" name="comment" type="text" placeholder="댓글 달기...">
-            </form>
+        <div class="post-content">
+            <div class="buttons">
+                <ul>
+                    <li><a href=""><div class="like-button"></div></a></li>
+                    <li><a href="#comment-input"><div class="comment-button"></div></a></li>
+                </ul>
+            </div>
+            <div class="likes">
+                <span><b>좋아요 n개</b></span>
+            </div>
+            <div class="content">
+                <p><span class="content-author">Author </span>{{ post.content }}</p>
+            </div>
+            <div class="post-comment">
+                {% for comment in post.postcomment_set.all %}
+                <div class="comment">
+                    <p>
+                        <strong>Name </strong>{{ comment.content }}
+                        <a class="delete-comment" href="{% url 'comment_delete' pk=post.pk comment_pk=comment.pk %}"><span></span></a>
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="created-date">
+                {{ post.created_date }}
+            </div>
+            <div class="post-form">
+                <section>
+                    <form action="{% url 'comment_add' pk=post.pk %}" method="post">
+                        {% csrf_token %}
+                        <input id="comment-input" class="comment-input" name="comment" type="text" placeholder="댓글 달기...">
+                    </form>
+                    <a href=""><div class="options"></div></a>
+                </section>
+            </div>
         </div>
     </div>
 

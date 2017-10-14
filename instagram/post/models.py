@@ -3,6 +3,7 @@ from django.db import models
 
 class Post(models.Model):
     photo = models.ImageField(upload_to='post')
+    content = models.TextField(blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

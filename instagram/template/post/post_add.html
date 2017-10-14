@@ -6,6 +6,7 @@
     <form enctype="multipart/form-data" action="" method="post">
         {% csrf_token %}
         <input type="file" name="post-photo">
+        <input type="textarea" name="content" placeholder="글 내용">
         <input type="submit" value="업로드">
     </form>
 </div>
