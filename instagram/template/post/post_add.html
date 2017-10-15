@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<div class="container">
+<div class="add-wrapper">
     <form enctype="multipart/form-data" action="" method="post">
         {% csrf_token %}
-        <input type="file" name="post-photo">
-        <input type="textarea" name="content" placeholder="글 내용">
-        <input type="submit" value="업로드">
+        <input class="file-upload"  type="file" name="post-photo"><span class="error-message"><i>{{ error }}</i></span>
+        <textarea class="form-control" rows="15" type="textarea" name="content" placeholder="글 내용"></textarea>
+        <input class="btn btn-default" type="submit" value="업로드">
     </form>
 </div>
 
