@@ -1,6 +1,5 @@
 import os
 
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.datastructures import MultiValueDictKeyError
 
@@ -48,5 +47,5 @@ def comment_add(request, pk):
 def comment_delete(request, pk, comment_pk):
     comment = PostComment.objects.filter(pk=comment_pk)
     comment.delete()
-    return redirect(post_list)
+    return redirect(f'/post/#post-{pk}')
 
