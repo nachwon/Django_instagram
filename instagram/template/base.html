@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'post/post_list.css' %}">
     <link rel="stylesheet" href="{% static 'post/post_add.css' %}">
     <link rel="stylesheet" href="{% static 'post/post_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'member/signup.css' %}">
     <link rel="shortcut icon" href="/media/favicon.png">
     <title>Instagram</title>
 </head>
@@ -21,6 +22,17 @@
             <ul class="head-ul">
                 <li>
                     <a href="{% url 'post_list' %}"><img class="insta-icon" src="https://png.icons8.com/instagram/win10/1600" alt=""><img class="insta-logo" src="/media/insta-logo.png" alt=""></a>
+                </li>
+                <li>
+                    <div class="icon-wrapper" >
+                        {% if user %}
+                        <span class="current-username">{{ user.username }}</span>
+                        <a href="{% url 'logout' %}"><span class="user-btn login glyphicon glyphicon-log-out" aria-hidden="true"></span></a>
+                        {% else %}
+                        <a href="{% url 'login' %}"><span class="user-btn login glyphicon glyphicon-log-in" aria-hidden="true"></span></a>
+                        {% endif %}
+                        <a href="{% url 'signup' %}"><span class="user-btn signup glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                    </div>
                 </li>
             </ul>
         </div>

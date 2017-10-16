@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="signup-body">
+    <h3>로그인</h3>
+    <form action="{% url 'logging' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-default" type="submit" value="로그인">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+.signup-body {
+    width: 600px;
+    margin: 40px auto;
+    border: 1px solid #ddd;
+    padding-bottom: 40px;
+    border-radius: 3px;
+    font-weight: bolder;
+}
+
+.signup-field {
+    display: inherit;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 6px;
+    margin: 10px auto;
+}
+
+.signup-finished {
+    text-align: center;
+}
+
+.signup-body .btn {
+    margin: 0 auto;
+    display: inherit;
+    margin-top: 20px;
+    width: 184px;
+    background-color: rgba(16, 78, 103, 0.17);
+    font-weight: bolder;
+}
+
+.signup-body h3 {
+    text-align: center;
+    font-weight: bolder;
+}
+
+.signup-body h1 {
+    margin-top: 40px;
+    font-weight: bolder;
+}

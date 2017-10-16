@@ -47,6 +47,12 @@ li {
     padding-left: 10px;
     border-left: 1px solid rgb(146, 146, 146);
 }
+
+.current-username {
+    vertical-align: middle;
+    font-weight: bolder;
+    margin-right: 20px;
+}
 /* header end */
 /* img start*/
 .post-photo-img {
@@ -83,6 +89,17 @@ li {
 .buttons .comment-button {
     background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/13cecc35f7af.png);
     background-position: -355px -263px;
+}
+
+.icon-wrapper {
+    margin-left: 700px;
+}
+
+.user-btn {
+    vertical-align: middle;
+    font-size: 20px;
+    margin: 0 10px;
+    color: rgb(53, 53, 53);
 }
 
 /* buttons end */

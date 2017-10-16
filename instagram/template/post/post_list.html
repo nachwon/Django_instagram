@@ -5,7 +5,12 @@
 {% for post in posts %}
     <div class="post" id="post-{{ post.pk }}">
         <div class="post-header">
-            <p><strong>Author name comes here</strong><a class="post-delete" href="{% url 'post_delete' pk=post.pk %}">DELETE</a></p>
+            <p>
+                <strong>{{ post.author }}</strong>
+                {% if request.user == post.author %}
+                <a class="post-delete" href="{% url 'post_delete' pk=post.pk %}">DELETE</a>
+                {% endif %}
+            </p>
         </div>
         <div class="post-photo">
             <a href="{% url 'post_detail' pk=post.pk %}"><div class="post-photo-img" style="background-image: url({{ post.photo.url }})" alt=""></div></a>
@@ -21,14 +26,16 @@
                 <span><b>좋아요 n개</b></span>
             </div>
             <div class="content">
-                <p><span class="content-author">Author </span>{{ post.content }}</p>
+                <p><span class="content-author">{{ post.author }} </span>{{ post.content }}</p>
             </div>
             <div class="post-comment">
                 {% for comment in post.comments.all %}
                 <div class="comment">
                     <p>
-                        <strong>Name </strong>{{ comment.content }}
+                        <strong>{{ comment.author }} </strong>{{ comment.content }}
+                        {% if comment.author == request.user %}
                         <a class="delete-comment" href="{% url 'comment_delete' pk=post.pk comment_pk=comment.pk %}"><span></span></a>
+                        {% endif %}
                     </p>
                 </div>
                 {% endfor %}

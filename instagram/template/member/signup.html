@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="signup-body">
+{% if signed_up %}
+    <h1 class="signup-finished">회원가입 완료!</h1>
+{% else %}
+    <h3>회원가입</h3>
+    <form action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <div class="no-match">{{ no_match }}</div>
+        <input class="btn btn-default" type="submit" value="회원가입">
+    </form>
+
+{% endif %}
+</div>
+{% endblock %}
