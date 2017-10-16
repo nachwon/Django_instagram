@@ -48,6 +48,15 @@ li {
     border-left: 1px solid rgb(146, 146, 146);
 }
 /* header end */
+/* img start*/
+.post-photo-img {
+    height: 598px;
+    width: 598px;
+    float: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+/* img end */
 /* buttons start*/
 
 .content-author {

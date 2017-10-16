@@ -8,7 +8,7 @@
             <p><strong>Author name comes here</strong><a class="post-delete" href="{% url 'post_delete' pk=post.pk %}">DELETE</a></p>
         </div>
         <div class="post-photo">
-            <a href="{% url 'post_detail' pk=post.pk %}"><img src="/media/{{ post.photo }}" alt=""></a>
+            <a href="{% url 'post_detail' pk=post.pk %}"><div class="post-photo-img" style="background-image: url({{ post.photo.url }})" alt=""></div></a>
         </div>
         <div class="post-content">
             <div class="buttons">
