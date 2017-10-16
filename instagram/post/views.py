@@ -1,6 +1,6 @@
 import os
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from post.models import Post, PostComment
 from .forms import PostAddForm
 
@@ -14,12 +14,11 @@ def post_list(request):
 
 
 def post_detail(request, pk):
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
     context = {
         'post': post,
     }
     return render(request, 'post/post_detail.html', context)
-
 
 
 def post_add(request):
