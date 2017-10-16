@@ -24,7 +24,7 @@
                 <p><span class="content-author">Author </span>{{ post.content }}</p>
             </div>
             <div class="post-comment">
-                {% for comment in post.postcomment_set.all %}
+                {% for comment in post.comments.all %}
                 <div class="comment">
                     <p>
                         <strong>Name </strong>{{ comment.content }}

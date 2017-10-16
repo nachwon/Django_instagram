@@ -1,8 +1,10 @@
 .detail-wrapper {
     height: 100%;
-    border: 1px solid black;
+    border: 1px solid #ddd;
     width: 935px;
     margin: 40px auto;
+    overflow: hidden;
+    border-radius: 2px;
 }
 
 .content-container {

@@ -17,3 +17,16 @@ class PostAddForm(forms.Form):
         label='',
     )
 
+
+class CommentAddForm(forms.Form):
+    comment = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "id": "comment-input-{{ post.pk }}",
+                "class": "comment-input",
+                "name": "comment",
+                "type": "text",
+                "placeholder": "댓글 달기...",
+            }
+        )
+    )

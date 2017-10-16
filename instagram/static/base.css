@@ -48,4 +48,98 @@ li {
     border-left: 1px solid rgb(146, 146, 146);
 }
 /* header end */
+/* buttons start*/
 
+.content-author {
+    font-weight: bolder;
+}
+
+.buttons ul {
+    margin: 0;
+    padding: 0;
+}
+
+.buttons div {
+    height: 24px;
+    width: 24px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.buttons .like-button {
+    background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/13cecc35f7af.png);
+    background-position: -208px -336px;
+}
+
+.buttons .comment-button {
+    background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/13cecc35f7af.png);
+    background-position: -355px -263px;
+}
+
+/* buttons end */
+
+.created-date {
+    font-size: 0.5em;
+    margin: 10px 0;
+    color: #999;
+}
+
+.post-form {
+    overflow: hidden;
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+    padding: 16px 0;
+}
+
+.post-form .comment-input {
+    max-width: 100%;
+    width: 94%;
+    border: 0;
+    float: left;
+}
+
+.post-form .comment-input:focus {
+    outline: none;
+}
+
+.post-form section div.options {
+    float: right;
+    background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/13cecc35f7af.png);
+    background-position: -276px -115px;
+    height: 16px;
+    width: 16px;
+    margin: 3px 0;
+}
+
+.post-comment {
+    width: 100%;
+}
+
+.post-comment div.comment {
+    margin: 5px 0;
+}
+
+.post-comment div.comment p {
+    margin: 0;
+    padding: 0;
+}
+
+.delete-comment span {
+    float: right;
+    color: #ccc;
+}
+
+.delete-comment span::before {
+    content:'\2715';
+    display: block;
+}
+
+.post-content {
+    padding: 0 16px;
+}
+
+.content {
+    margin: 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}

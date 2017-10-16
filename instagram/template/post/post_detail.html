@@ -10,13 +10,40 @@
             <span>Location</span>
         </div>
         <div class="content-body">
-            <div class="buttons">
+            <div class="content">
+                <p><span class="content-author">Author </span>{{ post.content }}</p>
+            </div>
+            {% for comment in post.comments.all %}
+                <div class="comment">
+                    <p>
+                        <strong>Name </strong>{{ comment.content }}
+                        <a class="delete-comment" href="{% url 'comment_delete' pk=post.pk comment_pk=comment.pk %}"><span></span></a>
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="buttons">
                 <ul>
                     <li><a href=""><div class="like-button"></div></a></li>
                     <li><a href="#comment-input-{{ post.pk }}"><div class="comment-button"></div></a></li>
                 </ul>
             </div>
+        <div class="likes">
+            <span><b>좋아요 n개</b></span>
         </div>
+        <div class="created-date">
+                {{ post.created_date }}
+        </div>
+        <div class="post-form">
+            <section>
+                <form action="{% url 'comment_add' pk=post.pk %}" method="post">
+                    {% csrf_token %}
+                    <input id="comment-input-{{ post.pk }}" class="comment-input" name="comment" type="text" placeholder="댓글 달기...">
+                </form>
+                <a href=""><div class="options"></div></a>
+            </section>
+        </div>
+        <a href=""><div class="options"></div></a>
     </div>
     {% else %}
     <h1>이미지 파일이 없습니다.</h1>
