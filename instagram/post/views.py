@@ -1,9 +1,8 @@
 import os
 
 from django.shortcuts import render, redirect
-from django.utils.datastructures import MultiValueDictKeyError
-
 from post.models import Post, PostComment
+from .forms import PostAddForm
 
 
 def post_list(request):
@@ -14,21 +13,30 @@ def post_list(request):
     return render(request, 'post/post_list.html', context)
 
 
-def post_add(request):
-    if request.method == 'GET':
-        return render(request, 'post/post_add.html')
+def post_detail(request, pk):
+    post = Post.objects.get(pk=pk)
+    context = {
+        'post': post,
+    }
+    return render(request, 'post/post_detail.html', context)
 
+
+
+def post_add(request):
     if request.method == 'POST':
-        try:
-            photo = request.FILES['post-photo']
-        except MultiValueDictKeyError:
-            context = {
-                'error': '사진을 올려주세요!'
-            }
-            return render(request, 'post/post_add.html', context)
-        content = request.POST['content']
-        Post.objects.create(photo=photo, content=content)
-        return redirect(post_list)
+        form = PostAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            photo = form.cleaned_data['photo']
+            content = form.cleaned_data['content']
+            post = Post.objects.create(photo=photo, content=content)
+            return redirect(post_list)
+
+    elif request.method == 'GET':
+        form = PostAddForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'post/post_add.html', context)
 
 
 def post_delete(request, pk):

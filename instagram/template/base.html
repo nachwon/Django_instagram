@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'post/post_list.css' %}">
     <link rel="stylesheet" href="{% static 'post/post_add.css' %}">
+    <link rel="stylesheet" href="{% static 'post/post_detail.css' %}">
     <link rel="shortcut icon" href="/media/favicon.png">
     <title>Instagram</title>
 </head>
@@ -24,10 +25,8 @@
             </ul>
         </div>
     </div>
-    <div class="contents">
     {% block content %}
     {% endblock %}
-    </div>
     <div class="post-add">
         <a href="{% url 'post_add' %}"><img src="https://cdn2.iconfinder.com/data/icons/ui-thick-lines/720/add-512.png" alt=""></a>
     </div>

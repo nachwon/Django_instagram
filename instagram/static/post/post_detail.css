@@ -1,0 +1,26 @@
+.detail-wrapper {
+    height: 100%;
+    border: 1px solid black;
+    width: 935px;
+    margin: 40px auto;
+}
+
+.content-container {
+    width: 335px;
+    height: 100%;
+    float: right;
+    padding: 0 24px;
+}
+
+.content-header {
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.content-header span {
+    display: inherit;
+}
+
+.detail-wrapper .detail-photo {
+    width: 598px;
+}

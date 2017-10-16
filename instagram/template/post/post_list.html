@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="contents">
 {% for post in posts %}
     <div class="post" id="post-{{ post.pk }}">
         <div class="post-header">
             <p><strong>Author name comes here</strong><a class="post-delete" href="{% url 'post_delete' pk=post.pk %}">DELETE</a></p>
         </div>
         <div class="post-photo">
-            <img src="/media/{{ post.photo }}" alt="">
+            <a href="{% url 'post_detail' pk=post.pk %}"><img src="/media/{{ post.photo }}" alt=""></a>
         </div>
         <div class="post-content">
             <div class="buttons">
@@ -47,4 +48,5 @@
         </div>
     </div>
 {% endfor %}
+</div>
 {% endblock %}
