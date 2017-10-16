@@ -1,5 +1,6 @@
 .add-wrapper {
-    border: 1px solid black;
+    border: 1px solid #dddddd;
+    border-radius: 2px;
     padding: 0 16px;
     width: 600px;
     overflow: hidden;
@@ -11,6 +12,10 @@
 
 .add-wrapper input.file-upload {
     float: left;
+}
+
+.add-wrapper input.file-upload:focus {
+    outline: none;
 }
 
 .add-wrapper textarea {
