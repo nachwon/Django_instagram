@@ -14,50 +14,41 @@ def signup(request):
             form = form.cleaned_data
             username = form['username']
             email = form['mail']
-            password_1 = form['password_1']
-            password_2 = form['password_2']
-            if password_1 == password_2 and not User.objects.filter(username=username).exists():
-                User.objects.create_user(username=username, email=email, password=password_1)
-                context = {
-                    'signed_up': True,
-                }
-            elif User.objects.filter(username=username).exists():
-                form = SignUpForm(request.POST)
-                context = {
-                    'form': form,
-                    'no_match': '이미 유저가 있습니다.',
-                }
-            elif password_1 != password_2:
-                form = SignUpForm(request.POST)
-                context = {
-                    'form': form,
-                    'no_match': '비밀번호가 일치하지 않습니다.',
-                }
+            password = form['password_2']
+            User.objects.create_user(username=username, email=email, password=password)
+            signed_up = True
+
+        else:
+            signed_up = False
+            context = {
+                'signed_up': signed_up,
+                'form': form
+            }
+            return render(request, 'member/signup.html', context)
     else:
+        signed_up = False
         form = SignUpForm()
-        context = {
-            'form': form
-        }
+
+    context = {
+        'signed_up': signed_up,
+        'form': form
+    }
+
     return render(request, 'member/signup.html', context)
 
 
 def user_login(request):
-        form = LoginForm()
-        context = {
-            'form': form,
-        }
-        return render(request, 'member/login.html', context)
-
-
-def logging(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        return redirect(post_list)
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            form.login(request)
+            return redirect(post_list)
     else:
-        return redirect(user_login)
+        form = LoginForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'member/login.html', context)
 
 
 def user_logout(request):

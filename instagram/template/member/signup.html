@@ -8,8 +8,15 @@
     <h3>회원가입</h3>
     <form action="{% url 'signup' %}" method="post">
         {% csrf_token %}
-        {{ form }}
-        <div class="no-match">{{ no_match }}</div>
+        {{ form.username.label }}
+        {{ form.username }}
+        <div class="no-match">{{ form.username.errors|striptags }}</div>
+        {{ form.mail }}
+        {{ form.password_1 }}
+        {{ form.password_2 }}
+        <div class="no-match">{{ form.password.errors|striptags }}</div>
+
+
         <input class="btn btn-default" type="submit" value="회원가입">
     </form>
 

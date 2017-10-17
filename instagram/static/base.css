@@ -56,10 +56,8 @@ li {
 /* header end */
 /* img start*/
 .post-photo-img {
-    height: 598px;
     width: 598px;
     float: left;
-    background-size: cover;
     background-repeat: no-repeat;
 }
 /* img end */

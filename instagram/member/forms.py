@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 
@@ -45,12 +46,20 @@ class SignUpForm(forms.Form):
         data = self.cleaned_data['username']
         user_exists = User.objects.filter(username=data).exists()
         if user_exists:
-            raise forms.ValidationError('유저 있음')
-        else:
-            return data
+            raise forms.ValidationError('유저가 이미 존재합니다.')
+        return data
+
+    def clean_password_2(self):
+        data = self.cleaned_data['password_2']
+        if self.cleaned_data['password_1'] != data:
+            raise forms.ValidationError('비밀번호가 일치하지 않습니다.')
+        return data
 
 
 class LoginForm(forms.Form):
+    """
+    is_valiid() 에서 주어진 아이디/패스워드를 사용한 authenticate 실행,
+    """
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -69,3 +78,25 @@ class LoginForm(forms.Form):
         ),
         label='',
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user = None
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+
+        self.user = authenticate(
+            username=username,
+            password=password,
+        )
+
+        if not self.user:
+            raise forms.ValidationError('아이디 또는 비밀번호가 잘못되었습니다.')
+        else:
+            setattr(self, 'login', self._login)
+
+    def _login(self, request):
+        login(request, self.user)

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="detail-wrapper">
     {% if post.photo %}
-    <div class="post-photo-img" style="background-image: url({{ post.photo.url }})" alt=""></div>
+    <img src="{{ post.photo.url }}" alt="" class="post-photo-img">
     <div class="content-container">
         <div class="content-header">
             <span><strong>{{ post.author }}</strong></span>
