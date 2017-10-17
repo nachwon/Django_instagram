@@ -4,21 +4,14 @@
 <div class="signup-body">
 {% if signed_up %}
     <h1 class="signup-finished">회원가입 완료!</h1>
+    <div class="signup-nav">
+        <a href="{% url 'login' %}">로그인하기</a>
+        |
+        <a href="{% url 'post_list' %}">메인으로</a>
+    </div>
 {% else %}
-    <h3>회원가입</h3>
-    <form action="{% url 'signup' %}" method="post">
-        {% csrf_token %}
-        {{ form.username.label }}
-        {{ form.username }}
-        <div class="no-match">{{ form.username.errors|striptags }}</div>
-        {{ form.mail }}
-        {{ form.password_1 }}
-        {{ form.password_2 }}
-        <div class="no-match">{{ form.password.errors|striptags }}</div>
 
-
-        <input class="btn btn-default" type="submit" value="회원가입">
-    </form>
+    {% include 'user_form.html' with form=signup_form submit_text='회원가입' direction='signup' %}
 
 {% endif %}
 </div>

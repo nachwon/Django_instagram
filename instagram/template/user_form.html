@@ -1,0 +1,16 @@
+<h3>{{ submit_text }}</h3>
+<form action="{% url direction %}" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        {{ field }}
+        {% if field.errors %}
+            <div class="no-match">{{ field.errors|striptags }}</div>
+        {% endif %}
+    {% endfor %}
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <div class="no-match">{{ error }}</div>
+        {% endfor %}
+    {% endif %}
+    <input class="btn btn-default" type="submit" value="{{ submit_text }}">
+</form>

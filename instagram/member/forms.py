@@ -55,6 +55,17 @@ class SignUpForm(forms.Form):
             raise forms.ValidationError('비밀번호가 일치하지 않습니다.')
         return data
 
+    def clean(self):
+        if self.is_valid():
+            setattr(self, 'signup', self._signup)
+        return self.cleaned_data
+
+    def _signup(self):
+        username = self.cleaned_data.get('username')
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password_2')
+        return User.objects.create_user(username=username, email=email, password=password)
+
 
 class LoginForm(forms.Form):
     """

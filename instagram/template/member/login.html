@@ -2,13 +2,8 @@
 
 {% block content %}
 <div class="signup-body">
-    <h3>로그인</h3>
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        {{ form.username }}
-        {{ form.password }}
-        <div class="no-match">{{ form.non_field_errors }}</div>
-        <input class="btn btn-default" type="submit" value="로그인">
-    </form>
+
+    {% include 'user_form.html' with form=login_form submit_text='로그인' direction='login' %}
+
 </div>
 {% endblock %}
