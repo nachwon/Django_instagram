@@ -30,9 +30,9 @@ def post_detail(request, pk):
 
 @login_required
 def post_like(request, pk):
+    user = request.user
     post = Post.objects.get(pk=pk)
-    post.like += 1
-    post.liked = True
+    post.liked.add(user)
     post.save()
     url = request.META['HTTP_REFERER']
     return redirect(f'{url}#post-{pk}')
@@ -40,9 +40,9 @@ def post_like(request, pk):
 
 @login_required
 def post_dislike(request, pk):
+    user = request.user
     post = Post.objects.get(pk=pk)
-    post.like -= 1
-    post.liked = False
+    post.liked.remove(user)
     post.save()
     url = request.META['HTTP_REFERER']
     return redirect(f'{url}#post-{pk}')

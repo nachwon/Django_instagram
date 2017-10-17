@@ -56,6 +56,8 @@ def logging(request):
     if user is not None:
         login(request, user)
         return redirect(post_list)
+    else:
+        return redirect(user_login)
 
 
 def user_logout(request):

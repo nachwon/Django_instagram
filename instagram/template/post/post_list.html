@@ -18,7 +18,7 @@
         <div class="post-content">
             <div class="buttons">
                 <ul>
-                    {% if post.liked %}
+                    {% if request.user in post.liked.all %}
                     <li><a href="{% url 'post_dislike' pk=post.pk %}"><div class="dislike-button"></div></a></li>
                     {% else %}
                     <li><a href="{% url 'post_like' pk=post.pk %}"><div class="like-button"></div></a></li>
@@ -27,7 +27,7 @@
                 </ul>
             </div>
             <div class="likes">
-                <span><b>좋아요 {{ post.like }}개</b></span>
+                <span><b>좋아요 {{ post.liked.all|length }}개</b></span>
             </div>
             <div class="content">
                 <p><span class="content-author">{{ post.author }} </span>{{ post.content }}</p>

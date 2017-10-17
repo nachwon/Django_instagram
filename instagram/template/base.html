@@ -25,7 +25,7 @@
                 </li>
                 <li>
                     <div class="icon-wrapper" >
-                        {% if user %}
+                        {% if user.is_authenticated %}
                         <span class="current-username">{{ user.username }}</span>
                         <a href="{% url 'logout' %}"><span class="user-btn login glyphicon glyphicon-log-out" aria-hidden="true"></span></a>
                         {% else %}

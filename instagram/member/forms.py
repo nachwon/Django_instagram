@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 
 
 class SignUpForm(forms.Form):
@@ -39,6 +40,14 @@ class SignUpForm(forms.Form):
         ),
         label='',
     )
+
+    def clean_username(self):
+        data = self.cleaned_data['username']
+        user_exists = User.objects.filter(username=data).exists()
+        if user_exists:
+            raise forms.ValidationError('유저 있음')
+        else:
+            return data
 
 
 class LoginForm(forms.Form):

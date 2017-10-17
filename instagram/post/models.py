@@ -6,9 +6,7 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
     photo = models.ImageField(upload_to='post')
     content = models.TextField(blank=True, null=True)
-    like = models.IntegerField(default=0)
-    liked = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_id')
-    # liked = models.BooleanField(default=False)
+    liked = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='post_liked',)
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -26,5 +24,8 @@ class PostComment(models.Model):
 
     class Meta:
         ordering = ["created_date"]
+
+
+
 
 
