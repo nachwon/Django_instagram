@@ -85,6 +85,10 @@ li {
     background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/13cecc35f7af.png);
     background-position: -208px -336px;
 }
+.buttons .dislike-button {
+    background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/13cecc35f7af.png);
+    background-position: -182px -336px;
+}
 
 .buttons .comment-button {
     background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/13cecc35f7af.png);

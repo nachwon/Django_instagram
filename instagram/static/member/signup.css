@@ -37,3 +37,7 @@
     margin-top: 40px;
     font-weight: bolder;
 }
+
+.signup-body .no-match {
+    text-align: center;
+}

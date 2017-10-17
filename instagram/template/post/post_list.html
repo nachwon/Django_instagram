@@ -18,12 +18,16 @@
         <div class="post-content">
             <div class="buttons">
                 <ul>
-                    <li><a href=""><div class="like-button"></div></a></li>
+                    {% if post.liked %}
+                    <li><a href="{% url 'post_dislike' pk=post.pk %}"><div class="dislike-button"></div></a></li>
+                    {% else %}
+                    <li><a href="{% url 'post_like' pk=post.pk %}"><div class="like-button"></div></a></li>
+                    {% endif %}
                     <li><a href="#comment-input-{{ post.pk }}"><div class="comment-button"></div></a></li>
                 </ul>
             </div>
             <div class="likes">
-                <span><b>좋아요 n개</b></span>
+                <span><b>좋아요 {{ post.like }}개</b></span>
             </div>
             <div class="content">
                 <p><span class="content-author">{{ post.author }} </span>{{ post.content }}</p>

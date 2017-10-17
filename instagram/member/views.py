@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from member.forms import SignUpForm, LoginForm
@@ -15,10 +16,16 @@ def signup(request):
             email = form['mail']
             password_1 = form['password_1']
             password_2 = form['password_2']
-            if password_1 == password_2:
+            if password_1 == password_2 and not User.objects.filter(username=username).exists():
                 User.objects.create_user(username=username, email=email, password=password_1)
                 context = {
                     'signed_up': True,
+                }
+            elif User.objects.filter(username=username).exists():
+                form = SignUpForm(request.POST)
+                context = {
+                    'form': form,
+                    'no_match': '이미 유저가 있습니다.',
                 }
             elif password_1 != password_2:
                 form = SignUpForm(request.POST)

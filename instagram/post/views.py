@@ -1,7 +1,6 @@
 import os
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from post.models import Post, PostComment
 from .forms import PostAddForm
@@ -27,6 +26,26 @@ def post_detail(request, pk):
         'post': post,
     }
     return render(request, 'post/post_detail.html', context)
+
+
+@login_required
+def post_like(request, pk):
+    post = Post.objects.get(pk=pk)
+    post.like += 1
+    post.liked = True
+    post.save()
+    url = request.META['HTTP_REFERER']
+    return redirect(f'{url}#post-{pk}')
+
+
+@login_required
+def post_dislike(request, pk):
+    post = Post.objects.get(pk=pk)
+    post.like -= 1
+    post.liked = False
+    post.save()
+    url = request.META['HTTP_REFERER']
+    return redirect(f'{url}#post-{pk}')
 
 
 @login_required
