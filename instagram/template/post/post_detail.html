@@ -26,7 +26,7 @@
         </div>
         <div class="buttons">
                 <ul>
-                    {% if request.user in post.liked.all %}
+                    {% if post.pk in liked %}
                     <li><a href="{% url 'post_dislike' pk=post.pk %}"><div class="dislike-button"></div></a></li>
                     {% else %}
                     <li><a href="{% url 'post_like' pk=post.pk %}"><div class="like-button"></div></a></li>
@@ -35,7 +35,18 @@
                 </ul>
             </div>
         <div class="likes">
-            <span><b>좋아요 {{ post.liked.all|length }}개</b></span>
+            {% if post.liked.all|length == 0 %}
+            <span>가장 먼저 좋아요를 눌러보세요!</span>
+            {% elif post.liked.all|length < 6 %}
+            <span>
+                <b>
+                    {{ post.liked.all|join:", " }}
+                </b>
+                님이 좋아합니다.
+            </span>
+            {% else %}
+            <span><b>좋아요 {{ post.liked.all.count }}개</b></span>
+            {% endif %}
         </div>
         <div class="created-date">
                 {{ post.created_date }}

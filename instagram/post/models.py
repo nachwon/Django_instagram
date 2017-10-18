@@ -6,7 +6,11 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
     photo = models.ImageField(upload_to='post')
     content = models.TextField(blank=True, null=True)
-    liked = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='post_liked',)
+    liked = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        through='PostLike',
+        related_name='liked_posts',
+    )
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -24,6 +28,18 @@ class PostComment(models.Model):
 
     class Meta:
         ordering = ["created_date"]
+
+
+class PostLike(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    liked_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.author.username} liked Post {self.post.pk}'
+
+    class Meta:
+        ordering = ["liked_date"]
 
 
 

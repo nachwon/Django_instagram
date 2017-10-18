@@ -13,15 +13,16 @@
     <link rel="stylesheet" href="{% static 'post/post_add.css' %}">
     <link rel="stylesheet" href="{% static 'post/post_detail.css' %}">
     <link rel="stylesheet" href="{% static 'member/signup.css' %}">
+    <link rel="script" href="{% static 'post/post.js' %}">
     <link rel="shortcut icon" href="/media/favicon.png">
     <title>Instagram</title>
 </head>
 <body>
-    <div class="header">
-        <div class="header-wrapper">
+    <div id="insta-head" class="header">
+        <div id="insta-head-wrapper" class="header-wrapper">
             <ul class="head-ul">
                 <li>
-                    <a href="{% url 'post_list' %}"><img class="insta-icon" src="https://png.icons8.com/instagram/win10/1600" alt=""><img class="insta-logo" src="/media/insta-logo.png" alt=""></a>
+                    <a href="{% url 'post_list' %}"><img class="insta-icon" src="https://png.icons8.com/instagram/win10/1600" alt=""><img id="insta-logo" class="insta-logo" src="/media/insta-logo.png" alt=""></a>
                 </li>
                 <li>
                     <div class="icon-wrapper" >
@@ -39,8 +40,11 @@
     </div>
     {% block content %}
     {% endblock %}
+    {% if request.user.is_authenticated %}
     <div class="post-add">
         <a href="{% url 'post_add' %}"><img src="/media/favicon.png" alt=""></a>
     </div>
+    {% endif %}
+<script src="{% static 'post/post.js' %}"></script>
 </body>
 </html>

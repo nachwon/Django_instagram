@@ -2,7 +2,7 @@ import os
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from post.models import Post, PostComment
+from post.models import Post, PostComment, PostLike
 from .forms import PostAddForm
 
 
@@ -10,11 +10,15 @@ def post_list(request):
     posts = Post.objects.all().order_by('-created_date')
     if request.user.is_authenticated:
         user = request.user
+        liked = user.postlike_set.all()
+        like_list = [i.post_id for i in liked]
     else:
         user = None
+        like_list = None
 
     context = {
         'posts': posts,
+        'liked': like_list,
         'user': user,
     }
     return render(request, 'post/post_list.html', context)
@@ -22,8 +26,17 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    if request.user.is_authenticated:
+        user = request.user
+        liked = user.postlike_set.all()
+        liked_list = [i.post_id for i in liked]
+    else:
+        user = None,
+        liked_list = None
     context = {
         'post': post,
+        'user': user,
+        'liked': liked_list,
     }
     return render(request, 'post/post_detail.html', context)
 
@@ -32,8 +45,7 @@ def post_detail(request, pk):
 def post_like(request, pk):
     user = request.user
     post = Post.objects.get(pk=pk)
-    post.liked.add(user)
-    post.save()
+    PostLike.objects.create(author_id=user.pk, post_id=post.pk)
     url = request.META['HTTP_REFERER']
     return redirect(f'{url}#post-{pk}')
 
@@ -42,8 +54,8 @@ def post_like(request, pk):
 def post_dislike(request, pk):
     user = request.user
     post = Post.objects.get(pk=pk)
-    post.liked.remove(user)
-    post.save()
+    liked = PostLike.objects.get(author_id=user.pk, post_id=post.pk)
+    liked.delete()
     url = request.META['HTTP_REFERER']
     return redirect(f'{url}#post-{pk}')
 
