@@ -2,17 +2,28 @@ import os
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from post.models import Post, PostComment, PostLike
+from post.models import Post, PostComment, PostLike, SubRelation
 from .forms import PostAddForm
 
 
 def post_list(request):
-    posts = Post.objects.all().order_by('-created_date')
+    # posts = Post.objects.all().order_by('-created_date')
     if request.user.is_authenticated:
         user = request.user
+        relations = SubRelation.objects.filter(follower=user)
+        if not relations:
+            posts = None
+        else:
+            for relation in relations:
+                posts = (
+                    relations[0].following.post_set.all()
+                    | relation.following.post_set.all()
+                )
+            posts = (posts | Post.objects.filter(author=user))
         liked = user.postlike_set.all()
         like_list = [i.post_id for i in liked]
     else:
+        posts = None
         user = None
         like_list = None
 

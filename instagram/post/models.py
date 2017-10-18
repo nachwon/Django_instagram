@@ -2,20 +2,12 @@ from django.conf import settings
 from django.db import models
 
 
-class Subscribe(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    subscriber = models.ManyToManyField('self', through='SubRelation',  symmetrical=False)
-
-    def __str__(self):
-        return self.user.username
-
-
 class SubRelation(models.Model):
-    follower = models.ForeignKey(Subscribe, related_name='follower')
-    following = models.ForeignKey(Subscribe, related_name='following')
+    follower = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='follower')
+    following = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='following')
 
     def __str__(self):
-        return f'{self.follower.user} is following {self.following.user}'
+        return f'{self.follower.username} is following {self.following.username}'
 
 
 class Post(models.Model):
