@@ -23,6 +23,7 @@ li {
 
 .header {
     position: fixed;
+    top: 0px;
     height: 77px;
     width: 100%;
     border-bottom: 1px solid #ddd;
