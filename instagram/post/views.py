@@ -64,6 +64,9 @@ def post_dislike(request, pk):
 
 @login_required
 def post_add(request):
+    if not request.user.is_authenticated:
+        return redirect('member:login')
+
     if request.method == 'POST':
         form = PostAddForm(request.POST, request.FILES)
         if form.is_valid():
@@ -72,8 +75,7 @@ def post_add(request):
             content = form.cleaned_data['content']
             Post.objects.create(author=user, photo=photo, content=content)
             return redirect('post:post_list')
-
-    elif request.method == 'GET':
+    else:
         form = PostAddForm()
     context = {
         'form': form
