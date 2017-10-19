@@ -7,8 +7,8 @@ from .forms import PostAddForm
 
 
 def post_list(request):
-    posts = Post.objects.all().order_by('-created_date')
     if request.user.is_authenticated:
+        posts = Post.objects.all()
         user = request.user
         liked = user.postlike_set.all()
         like_list = [i.post_id for i in liked]
@@ -26,12 +26,13 @@ def post_list(request):
 
 
 def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
     if request.user.is_authenticated:
+        post = get_object_or_404(Post, pk=pk)
         user = request.user
         liked = user.postlike_set.all()
         liked_list = [i.post_id for i in liked]
     else:
+        post = None,
         user = None,
         liked_list = None
     context = {
@@ -84,7 +85,6 @@ def post_add(request):
 def post_delete(request, pk):
     post = Post.objects.get(pk=pk)
     post.delete()
-    os.remove(f'media/{post.photo.name}')
     return redirect('post:post_list')
 
 
