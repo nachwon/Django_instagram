@@ -125,6 +125,24 @@ li {
     color: rgb(53, 53, 53);
 }
 
+.post-add {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+}
+
+.post-add img {
+    height: 50px;
+    width: 50px;
+    transition-duration: 0.2s;
+}
+
+.post-add img:hover {
+    height: 55px;
+    width: 55px;
+    transition-duration: 0.2s;
+}
+
 /* buttons end */
 
 .created-date {

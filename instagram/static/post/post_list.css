@@ -44,16 +44,3 @@
     padding: 0;
     margin: 0;
 }
-
-.post-add {
-    position: fixed;
-    height: 30px;
-    width: 30px;
-    right: 50px;
-    bottom: 50px;
-}
-
-.post-add img {
-    height: 50px;
-    width: 50px;
-}

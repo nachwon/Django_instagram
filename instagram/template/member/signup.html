@@ -5,13 +5,13 @@
 {% if signed_up %}
     <h1 class="signup-finished">회원가입 완료!</h1>
     <div class="signup-nav">
-        <a href="{% url 'login' %}">로그인하기</a>
+        <a href="{% url 'member:login' %}">로그인하기</a>
         |
-        <a href="{% url 'post_list' %}">메인으로</a>
+        <a href="{% url 'post:post_list' %}">메인으로</a>
     </div>
 {% else %}
 
-    {% include 'user_form.html' with form=signup_form submit_text='회원가입' direction='signup' %}
+    {% include 'user_form.html' with form=signup_form submit_text='회원가입' direction='member:signup' %}
 
 {% endif %}
 </div>

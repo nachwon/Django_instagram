@@ -22,16 +22,16 @@
         <div id="insta-head-wrapper" class="header-wrapper">
             <ul class="head-ul">
                 <li>
-                    <a href="{% url 'post_list' %}"><img class="insta-icon" src="https://png.icons8.com/instagram/win10/1600" alt=""><img id="insta-logo" class="insta-logo" src="/media/insta-logo.png" alt=""></a>
+                    <a href="{% url 'post:post_list' %}"><img class="insta-icon" src="https://png.icons8.com/instagram/win10/1600" alt=""><img id="insta-logo" class="insta-logo" src="/media/insta-logo.png" alt=""></a>
                 </li>
                 <li>
                     <div class="icon-wrapper" >
                         {% if user.is_authenticated %}
                         <span class="current-username">{{ user.username }}</span>
-                        <a href="{% url 'logout' %}"><span class="user-btn login glyphicon glyphicon-log-out" aria-hidden="true"></span></a>
+                        <a href="{% url 'member:logout' %}"><span class="user-btn login glyphicon glyphicon-log-out" aria-hidden="true"></span></a>
                         {% else %}
-                        <a href="{% url 'login' %}"><span class="user-btn login glyphicon glyphicon-log-in" aria-hidden="true"></span></a>
-                        <a href="{% url 'signup' %}"><span class="user-btn signup glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                        <a href="{% url 'member:login' %}"><span class="user-btn login glyphicon glyphicon-log-in" aria-hidden="true"></span></a>
+                        <a href="{% url 'member:signup' %}"><span class="user-btn signup glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                         {% endif %}
                     </div>
                 </li>
@@ -42,7 +42,7 @@
     {% endblock %}
     {% if request.user.is_authenticated %}
     <div class="post-add">
-        <a href="{% url 'post_add' %}"><img src="/media/favicon.png" alt=""></a>
+        <a href="{% url 'post:post_add' %}"><img src="/media/favicon.png" alt=""></a>
     </div>
     {% endif %}
 

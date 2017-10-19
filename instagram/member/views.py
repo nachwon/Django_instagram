@@ -31,7 +31,7 @@ def user_login(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             form.login(request)
-            return redirect(post_list)
+            return redirect('post:post_list')
     else:
         form = LoginForm()
     context = {
@@ -42,4 +42,4 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect(post_list)
+    return redirect('post:post_list')

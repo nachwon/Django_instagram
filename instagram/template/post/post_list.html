@@ -8,20 +8,20 @@
             <p>
                 <strong>{{ post.author }}</strong>
                 {% if request.user == post.author %}
-                <a class="post-delete" href="{% url 'post_delete' pk=post.pk %}">글 삭제</a>
+                <a class="post-delete" href="{% url 'post:post_delete' pk=post.pk %}">글 삭제</a>
                 {% endif %}
             </p>
         </div>
         <div class="post-photo">
-            <a href="{% url 'post_detail' pk=post.pk %}"><img src="{{ post.photo.url }}" alt="" class="post-photo-img"></a>
+            <a href="{% url 'post:post_detail' pk=post.pk %}"><img src="{{ post.photo.url }}" alt="" class="post-photo-img"></a>
         </div>
         <div class="post-content">
             <div class="buttons">
                 <ul>
                     {% if post.pk in liked %}
-                    <li><a href="{% url 'post_dislike' pk=post.pk %}"><div class="dislike-button"></div></a></li>
+                    <li><a href="{% url 'post:post_dislike' pk=post.pk %}"><div class="dislike-button"></div></a></li>
                     {% else %}
-                    <li><a href="{% url 'post_like' pk=post.pk %}"><div class="like-button"></div></a></li>
+                    <li><a href="{% url 'post:post_like' pk=post.pk %}"><div class="like-button"></div></a></li>
                     {% endif %}
                     <li><a href="#comment-input-{{ post.pk }}"><div class="comment-button"></div></a></li>
                 </ul>
@@ -49,7 +49,7 @@
                     <p>
                         <strong>{{ comment.author }} </strong>{{ comment.content }}
                         {% if comment.author == request.user %}
-                        <a class="delete-comment" href="{% url 'comment_delete' pk=post.pk comment_pk=comment.pk %}"><span></span></a>
+                        <a class="delete-comment" href="{% url 'post:comment_delete' pk=post.pk comment_pk=comment.pk %}"><span></span></a>
                         {% endif %}
                     </p>
                 </div>
@@ -60,7 +60,7 @@
             </div>
             <div class="post-form">
                 <section>
-                    <form action="{% url 'comment_add' pk=post.pk %}" method="post">
+                    <form action="{% url 'post:comment_add' pk=post.pk %}" method="post">
                         {% csrf_token %}
                         <input id="comment-input-{{ post.pk }}" class="comment-input" name="comment" type="text" placeholder="댓글 달기...">
                     </form>
