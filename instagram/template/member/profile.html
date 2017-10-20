@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile-content">
+    <div class="container">
+        <div class="profile-head">
+            <div>
+                <img src="{{ user.img_profile }}" alt="" class="img-circle">
+                <span class="username">{{ user.username }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="error-403">
+    <h1>권한이 없습니다.</h1>
+    {% if exception %}
+        <p>{{ exception }}</p>
+    {% endif %}
+</div>
+
+
+{% endblock %}

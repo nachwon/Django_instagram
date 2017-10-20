@@ -1,0 +1,9 @@
+.error-403 h1 {
+    text-align: center;
+    margin-top: 150px;
+    font-weight: bolder;
+}
+
+.error-403 p {
+    text-align: center;
+}

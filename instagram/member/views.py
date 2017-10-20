@@ -8,7 +8,7 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.signup()
+            form.save()
             signed_up = True
 
         else:
@@ -43,3 +43,8 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('post:post_list')
+
+
+def user_profile(request):
+    if request.user.is_authenticated:
+        return render(request, 'member/profile.html')

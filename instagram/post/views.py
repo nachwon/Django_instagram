@@ -1,6 +1,7 @@
 import os
 
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404
 from post.models import Post, PostComment, PostLike
 from .forms import PostAddForm
@@ -70,10 +71,9 @@ def post_add(request):
     if request.method == 'POST':
         form = PostAddForm(request.POST, request.FILES)
         if form.is_valid():
-            user = request.user
-            photo = form.cleaned_data['photo']
-            content = form.cleaned_data['content']
-            Post.objects.create(author=user, photo=photo, content=content)
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
             return redirect('post:post_list')
     else:
         form = PostAddForm()
@@ -89,14 +89,13 @@ def post_delete(request, pk):
     if post.author == request.user:
         post.delete()
         return redirect('post:post_list')
-    raise PermissionError('잘못된 접근입니다.')
+    raise PermissionDenied('잘못된 접근입니다.')
 
 
 @login_required
 def comment_add(request, pk):
-    if request.user.is_authenticated:
-        user = request.user
-    post = Post.objects.get(pk=pk)
+    post = get_object_or_404(Post, pk=pk)
+    user = request.user
     PostComment.objects.create(author=user, post=post, content=request.POST['comment'])
     url = request.META['HTTP_REFERER']
     return redirect(f'{url}#post-{pk}')
