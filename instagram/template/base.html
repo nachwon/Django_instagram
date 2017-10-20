@@ -44,6 +44,8 @@
     <div class="post-add">
         <a href="{% url 'post:post_add' %}"><img src="/media/favicon.png" alt=""></a>
     </div>
+    {% else %}
+    {% include 'member/login_main.html' %}
     {% endif %}
 </body>
 </html>

@@ -18,10 +18,11 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from post.views import post_list
+from config.views import redirect_to_main
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', redirect_to_main, name='index'),
     url(r'^post/', include('post.urls', namespace='post')),
     url(r'^member/', include('member.urls', namespace='member')),
 ]

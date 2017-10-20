@@ -5,12 +5,15 @@
     {% for post in posts %}
     <div class="post" id="post-{{ post.pk }}">
         <div class="post-header">
-            <p>
-                <strong>{{ post.author }}</strong>
-                {% if request.user == post.author %}
-                <a class="post-delete" href="{% url 'post:post_delete' pk=post.pk %}">글 삭제</a>
-                {% endif %}
-            </p>
+            <form action="{% url 'post:post_delete' pk=post.pk %}" method="post">
+                {% csrf_token %}
+                <p>
+                    <strong>{{ post.author }}</strong>
+                    {% if request.user == post.author %}
+                    <input type="submit" class="post-delete" value="글 삭제">
+                    {% endif %}
+                </p>
+            </form>
         </div>
         <div class="post-photo">
             <a href="{% url 'post:post_detail' pk=post.pk %}"><img src="{{ post.photo.url }}" alt="" class="post-photo-img"></a>
@@ -18,12 +21,20 @@
         <div class="post-content">
             <div class="buttons">
                 <ul>
+                    <li>
                     {% if post.pk in liked %}
-                    <li><a href="{% url 'post:post_dislike' pk=post.pk %}"><div class="dislike-button"></div></a></li>
+                    <form action="{% url 'post:post_dislike' pk=post.pk %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="" class="interact-btn dislike-button">
+                    </form>
                     {% else %}
-                    <li><a href="{% url 'post:post_like' pk=post.pk %}"><div class="like-button"></div></a></li>
+                    <form action="{% url 'post:post_like' pk=post.pk %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="" class="interact-btn like-button">
+                    </form>
                     {% endif %}
-                    <li><a href="#comment-input-{{ post.pk }}"><div class="comment-button"></div></a></li>
+                    </li>
+                    <li><a href="#comment-input-{{ post.pk }}"><div class="interact-btn comment-button"></div></a></li>
                 </ul>
             </div>
             <div class="likes">
@@ -46,12 +57,16 @@
             <div class="post-comment">
                 {% for comment in post.comments.all %}
                 <div class="comment">
-                    <p>
-                        <strong>{{ comment.author }} </strong>{{ comment.content }}
-                        {% if comment.author == request.user %}
-                        <a class="delete-comment" href="{% url 'post:comment_delete' pk=post.pk comment_pk=comment.pk %}"><span></span></a>
-                        {% endif %}
-                    </p>
+                    <form action="{% url 'post:comment_delete' pk=post.pk comment_pk=comment.pk %}" method="post">
+                        <p>
+                            <strong>{{ comment.author }} </strong>{{ comment.content }}
+                            {% csrf_token %}
+                            {% if comment.author == request.user %}
+                            <input type="submit" class="delete-comment" value="X"><span></span></input>
+                            {% endif %}
+
+                        </p>
+                    </form>
                 </div>
                 {% endfor %}
             </div>

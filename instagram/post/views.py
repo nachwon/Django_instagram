@@ -85,9 +85,11 @@ def post_add(request):
 
 @login_required
 def post_delete(request, pk):
-    post = Post.objects.get(pk=pk)
-    post.delete()
-    return redirect('post:post_list')
+    post = get_object_or_404(Post, pk=pk)
+    if post.author == request.user:
+        post.delete()
+        return redirect('post:post_list')
+    raise PermissionError('잘못된 접근입니다.')
 
 
 @login_required
