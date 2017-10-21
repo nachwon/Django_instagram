@@ -6,7 +6,7 @@ from post.views import post_list
 
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             signed_up = True

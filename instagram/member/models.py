@@ -11,7 +11,7 @@ class User(AbstractUser):
     img_profile = models.ImageField(
         '프로필 사진',
         upload_to='user',
-        default='/media/default-profile.jpg',
+        default='/default-profile.jpg',
         blank=True,
     )
     age = models.IntegerField('나이', null=True)

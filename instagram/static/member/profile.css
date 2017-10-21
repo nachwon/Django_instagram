@@ -5,3 +5,18 @@
 .profile-content span {
     font-size: 20px;
 }
+
+.profile-img {
+    width: 152px;
+    float: left;
+}
+
+.profile-content .profile-info {
+    width: 100px;
+    float: left;
+    margin-left: 100px;
+}
+
+.profile-content .profile-info .username {
+    font-weight: bolder;
+}

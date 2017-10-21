@@ -12,70 +12,6 @@ class CustomUserCreationForm(UserCreationForm):
         fields = UserCreationForm.Meta.fields + ('age',)
 
 
-# class SignUpForm(forms.Form):
-    # username = forms.CharField(
-    #     widget=forms.TextInput(
-    #         attrs={
-    #             'class': 'signup-field',
-    #             'placeholder': '아이디',
-    #         }
-    #     ),
-    #     label='',
-    # )
-    # mail = forms.EmailField(
-    #     widget=forms.EmailInput(
-    #         attrs={
-    #             'class': 'signup-field',
-    #             'placeholder': '이메일',
-    #         }
-    #     ),
-    #     label='',
-    #     required=False,
-    # )
-    # password_1 = forms.CharField(
-    #     widget=forms.PasswordInput(
-    #         attrs={
-    #             'class': 'signup-field password',
-    #             'placeholder': '비밀번호',
-    #         }
-    #     ),
-    #     label='',
-    # )
-    # password_2 = forms.CharField(
-    #     widget=forms.PasswordInput(
-    #         attrs={
-    #             'class': 'signup-field password',
-    #             'placeholder': '비밀번호 확인',
-    #         }
-    #     ),
-    #     label='',
-    # )
-    #
-    # def clean_username(self):
-    #     data = self.cleaned_data['username']
-    #     user_exists = User.objects.filter(username=data).exists()
-    #     if user_exists:
-    #         raise forms.ValidationError('유저가 이미 존재합니다.')
-    #     return data
-    #
-    # def clean_password_2(self):
-    #     data = self.cleaned_data['password_2']
-    #     if self.cleaned_data['password_1'] != data:
-    #         raise forms.ValidationError('비밀번호가 일치하지 않습니다.')
-    #     return data
-    #
-    # def clean(self):
-    #     if self.is_valid():
-    #         setattr(self, 'signup', self._signup)
-    #     return self.cleaned_data
-    #
-    # def _signup(self):
-    #     username = self.cleaned_data.get('username')
-    #     email = self.cleaned_data.get('email')
-    #     password = self.cleaned_data.get('password_2')
-    #     return User.objects.create_user(username=username, email=email, password=password)
-
-
 class SignUpForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
@@ -85,7 +21,7 @@ class SignUpForm(UserCreationForm):
             if field == 'password1':
                 pword = '비밀번호'
             else:
-                pword = '비밀번호 확인'
+                pword = pword + ' 확인'
             self.fields[field].widget.attrs.update(
                 {
                     'class': 'signup-field',
@@ -113,7 +49,7 @@ class SignUpForm(UserCreationForm):
                 attrs={
                     'class': 'signup-field',
                     'placeholder': '나이',
-                }
+                },
             ),
             'img_profile': forms.ClearableFileInput(
                 attrs={

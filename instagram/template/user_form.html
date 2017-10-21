@@ -1,5 +1,5 @@
 <h3>{{ submit_text }}</h3>
-<form action="{% url direction %}" method="post">
+<form action="{% url direction %}" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {% for field in form %}
         {{ field }}

@@ -5,8 +5,14 @@
     <div class="container">
         <div class="profile-head">
             <div>
-                <img src="{{ user.img_profile }}" alt="" class="img-circle">
-                <span class="username">{{ user.username }}</span>
+                {% if 'media' in user.img_profile %}
+                <img src="{{ user.img_profile }}" alt="" class="profile-img img-circle">
+                {% else %}
+                <img src="/media/{{ user.img_profile }}" alt="" class="profile-img img-circle">
+                {% endif %}
+                <div class="profile-info">
+                    <span class="username">{{ user.username }}</span>
+                </div>
             </div>
         </div>
     </div>

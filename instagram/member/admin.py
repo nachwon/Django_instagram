@@ -11,7 +11,6 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = BaseUserAdmin.add_fieldsets + (
         ('추가 정보', {'fields': ('img_profile', 'age',)}),
     )
-    pass
 
 
 admin.site.register(CustomUser, UserAdmin)
