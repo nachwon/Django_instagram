@@ -27,10 +27,13 @@ def signup(request):
 
 
 def user_login(request):
+    next_url = request.GET.get('next')
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             form.login(request)
+            if next_url:
+                return redirect(next_url)
             return redirect('post:post_list')
     else:
         form = LoginForm()

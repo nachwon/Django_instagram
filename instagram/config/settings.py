@@ -29,6 +29,7 @@ STATIC_URL = '/static/'
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'template')
 
 AUTH_USER_MODEL = 'member.User'
+LOGIN_URL = 'member:login'
 
 
 # Quick-start development settings - unsuitable for production

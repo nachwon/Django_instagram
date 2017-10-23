@@ -6,6 +6,9 @@
         <div class="profile-head">
             <div>
                 {% if 'media' in user.img_profile %}
+                media
+                {% endif %}
+                {% if 'media' in user.img_profile %}
                 <img src="{{ user.img_profile }}" alt="" class="profile-img img-circle">
                 {% else %}
                 <img src="/media/{{ user.img_profile }}" alt="" class="profile-img img-circle">

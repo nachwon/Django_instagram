@@ -1,7 +1,6 @@
-import os
-
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from member.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from post.models import Post, PostComment, PostLike
 from .forms import PostAddForm
@@ -14,8 +13,8 @@ def post_list(request):
         liked = user.postlike_set.all()
         like_list = [i.post_id for i in liked]
     else:
-        posts = None
-        user = None
+        posts = Post.objects.all()
+        user = request.user
         like_list = None
 
     context = {
@@ -33,8 +32,8 @@ def post_detail(request, pk):
         liked = user.postlike_set.all()
         liked_list = [i.post_id for i in liked]
     else:
-        post = None,
-        user = None,
+        post = get_object_or_404(Post, pk=pk)
+        user = request.user
         liked_list = None
     context = {
         'post': post,
@@ -46,13 +45,14 @@ def post_detail(request, pk):
 
 @login_required
 def post_like(request, pk):
-    user = request.user
-    post = get_object_or_404(Post, pk=pk)
-    if PostLike.objects.filter(author_id=user.pk, post_id=post.pk).exists():
-        liked = PostLike.objects.get(author_id=user.pk, post_id=post.pk)
-        liked.delete()
-    else:
-        PostLike.objects.create(author_id=user.pk, post_id=post.pk)
+    if request.method == 'POST':
+        user = request.user
+        post = get_object_or_404(Post, pk=pk)
+        if PostLike.objects.filter(author_id=user.pk, post_id=post.pk).exists():
+            liked = PostLike.objects.get(author_id=user.pk, post_id=post.pk)
+            liked.delete()
+        else:
+            PostLike.objects.create(author_id=user.pk, post_id=post.pk)
 
     url = request.META['HTTP_REFERER']
     return redirect(f'{url}#post-{pk}')
@@ -60,9 +60,6 @@ def post_like(request, pk):
 
 @login_required
 def post_add(request):
-    if not request.user.is_authenticated:
-        return redirect('member:login')
-
     if request.method == 'POST':
         form = PostAddForm(request.POST, request.FILES)
         if form.is_valid():
