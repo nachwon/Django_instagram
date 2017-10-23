@@ -102,4 +102,3 @@ def comment_delete(request, pk, comment_pk):
     comment.delete()
     url = request.META['HTTP_REFERER']
     return redirect(f'{url}#post-{pk}')
-

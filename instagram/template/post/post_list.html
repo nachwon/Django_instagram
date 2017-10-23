@@ -24,11 +24,13 @@
                     <li>
                         <form action="{% url 'post:post_like' pk=post.pk %}" method="post">
                         {% csrf_token %}
+                            <input type="submit" value="" class="interact-btn
                     {% if post.pk in liked %}
-                            <input type="submit" value="" class="interact-btn dislike-button">
+                            dislike-button
                     {% else %}
-                            <input type="submit" value="" class="interact-btn like-button">
+                            like-button
                     {% endif %}
+                            ">
                          </form>
                     </li>
                     <li><a href="#comment-input-{{ post.pk }}"><div class="interact-btn comment-button"></div></a></li>
