@@ -47,18 +47,13 @@ def post_detail(request, pk):
 @login_required
 def post_like(request, pk):
     user = request.user
-    post = Post.objects.get(pk=pk)
-    PostLike.objects.create(author_id=user.pk, post_id=post.pk)
-    url = request.META['HTTP_REFERER']
-    return redirect(f'{url}#post-{pk}')
+    post = get_object_or_404(Post, pk=pk)
+    if PostLike.objects.filter(author_id=user.pk, post_id=post.pk).exists():
+        liked = PostLike.objects.get(author_id=user.pk, post_id=post.pk)
+        liked.delete()
+    else:
+        PostLike.objects.create(author_id=user.pk, post_id=post.pk)
 
-
-@login_required
-def post_dislike(request, pk):
-    user = request.user
-    post = Post.objects.get(pk=pk)
-    liked = PostLike.objects.get(author_id=user.pk, post_id=post.pk)
-    liked.delete()
     url = request.META['HTTP_REFERER']
     return redirect(f'{url}#post-{pk}')
 

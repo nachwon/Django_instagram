@@ -60,8 +60,3 @@ class PostLike(models.Model):
 
     class Meta:
         ordering = ["liked_date"]
-
-
-
-
-
