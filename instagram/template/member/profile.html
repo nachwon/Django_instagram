@@ -22,7 +22,7 @@
             <div class="thumbnail-wrapper">
             {% for post in request.user.post_set.all %}
                 <div class="photos">
-                    <a href="">
+                    <a href="{% url 'post:post_detail' pk=post.pk %}">
                         <img src="/media/{{ post.photo }}" alt="">
                     </a>
                 </div>

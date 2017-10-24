@@ -31,17 +31,16 @@
         <div class="buttons">
                 <ul>
                     <li>
-                    {% if post.pk in liked %}
-                    <form action="{% url 'post:post_dislike' pk=post.pk %}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" value="" class="interact-btn dislike-button">
-                    </form>
-                    {% else %}
                     <form action="{% url 'post:post_like' pk=post.pk %}" method="post">
                         {% csrf_token %}
-                        <input type="submit" value="" class="interact-btn like-button">
-                    </form>
+                            <input type="submit" value="" class="interact-btn
+                    {% if post.pk in liked %}
+                            dislike-button
+                    {% else %}
+                            like-button
                     {% endif %}
+                            ">
+                         </form>
                     </li>
                     <li><a href="#comment-input-{{ post.pk }}"><div class="interact-btn comment-button"></div></a></li>
                 </ul>
