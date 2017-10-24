@@ -15,6 +15,13 @@ class User(AbstractUser):
         blank=True,
     )
     age = models.IntegerField('나이', null=True)
+    USER_TYPE_FACEBOOK = 'f'
+    USER_TYPE_DJANGO = 'd'
+    USER_TYPE_CHOICES = {
+        (USER_TYPE_FACEBOOK, 'Facebook'),
+        (USER_TYPE_DJANGO, 'Django'),
+    }
+    user_type = models.CharField(max_length=1, choices=USER_TYPE_CHOICES)
     following = models.ManyToManyField(
         'self',
         symmetrical=False,

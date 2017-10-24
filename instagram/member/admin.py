@@ -6,7 +6,7 @@ from member.models import User as CustomUser, Relationship
 
 class UserAdmin(BaseUserAdmin):
     fieldsets = BaseUserAdmin.fieldsets + (
-        ('추가 정보', {'fields': ('img_profile', 'age',)}),
+        ('추가 정보', {'fields': ('img_profile', 'age', 'user_type')}),
     )
     add_fieldsets = BaseUserAdmin.add_fieldsets + (
         ('추가 정보', {'fields': ('img_profile', 'age',)}),
