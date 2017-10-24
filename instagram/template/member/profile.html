@@ -2,20 +2,31 @@
 
 {% block content %}
 <div class="profile-content">
-    <div class="container">
+    <div class="profile-container">
         <div class="profile-head">
-            <div>
-                {% if 'media' in user.img_profile %}
-                media
-                {% endif %}
-                {% if 'media' in user.img_profile %}
-                <img src="{{ user.img_profile }}" alt="" class="profile-img img-circle">
-                {% else %}
-                <img src="/media/{{ user.img_profile }}" alt="" class="profile-img img-circle">
-                {% endif %}
-                <div class="profile-info">
-                    <span class="username">{{ user.username }}</span>
+            <img src="/media/{{ user.img_profile }}" alt="" class="profile-img img-circle">
+            <div class="profile-info">
+                <span class="username">{{ user.username }}</span>
+                <div class="info-wrapper">
+                    <span>게시물 <strong>{{ request.user.post_set.count }}</strong></span>
+                    <span>팔로워 <strong>{{ request.user.followers.count }}</strong></span>
+                    <span>팔로잉 <strong>{{ request.user.following.count }}</strong></span>
                 </div>
+                <div class="name">
+                    <span class="nick-name">{{ request.user.nickname }}</span>
+                    <span class="real-name">{{ request.user.first_name }} {{ request.user.last_name }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="post-thumbnails">
+            <div class="thumbnail-wrapper">
+            {% for post in request.user.post_set.all %}
+                <div class="photos">
+                    <a href="">
+                        <img src="/media/{{ post.photo }}" alt="">
+                    </a>
+                </div>
+            {% endfor %}
             </div>
         </div>
     </div>

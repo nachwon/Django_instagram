@@ -31,12 +31,18 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = UserCreationForm.Meta.fields + ('img_profile', 'email', 'age',)
+        fields = UserCreationForm.Meta.fields + ('nickname', 'img_profile', 'email', 'age',)
         widgets = {
             'username': forms.TextInput(
                 attrs={
                     'class': 'signup-field',
                     'placeholder': '아이디',
+                }
+            ),
+            'nickname': forms.TextInput(
+                attrs={
+                    'class': 'signup-field',
+                    'placeholder': '닉네임',
                 }
             ),
             'email': forms.EmailInput(

@@ -12,7 +12,7 @@ class User(AbstractUser):
     img_profile = models.ImageField(
         '프로필 사진',
         upload_to='user',
-        default='/default-profile.jpg',
+        default='user/default-profile.png',
         blank=True,
     )
     age = models.IntegerField('나이', null=True)
@@ -22,7 +22,11 @@ class User(AbstractUser):
         (USER_TYPE_FACEBOOK, 'Facebook'),
         (USER_TYPE_DJANGO, 'Django'),
     }
-    user_type = models.CharField(max_length=1, choices=USER_TYPE_CHOICES)
+    user_type = models.CharField(
+        max_length=1,
+        choices=USER_TYPE_CHOICES,
+        default=USER_TYPE_DJANGO
+    )
     following = models.ManyToManyField(
         'self',
         symmetrical=False,

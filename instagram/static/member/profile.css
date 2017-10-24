@@ -2,6 +2,17 @@
     margin-top: 110px;
 }
 
+.profile-container {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.profile-content .profile-head {
+    width: 1100px;
+    height: 200px;
+    margin: 0 auto;
+}
+
 .profile-content span {
     font-size: 20px;
 }
@@ -12,11 +23,49 @@
 }
 
 .profile-content .profile-info {
-    width: 100px;
+    width: 625px;
     float: left;
     margin-left: 100px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
 }
 
 .profile-content .profile-info .username {
-    font-weight: bolder;
+    font-size: 35px;
 }
+
+.profile-content .info-wrapper {
+    width: 600px;
+    margin: 15px 0;
+}
+
+.profile-content .info-wrapper span {
+    margin-right: 40px;
+}
+
+.profile-content .name .nick-name {
+    font-weight: bold;
+    margin-right: 30px;
+}
+
+.post-thumbnails .thumbnail-wrapper {
+    width: 824px;
+    margin: 0 auto;
+}
+
+.post-thumbnails .photos img {
+    width: 200px;
+    height: 200px;
+    float: left;
+    border: 1px solid #ddd;
+    margin: 3px;
+    padding: 3px;
+    border-radius: 3px;
+    transition-duration: 0.5s;
+}
+
+.post-thumbnails .photos img:hover {
+    border: 1px solid rgb(138, 138, 138);
+    transition-duration: 0.5s;
+}
+
