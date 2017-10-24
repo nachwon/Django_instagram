@@ -20,6 +20,12 @@
     border-bottom: 1px solid #ddd;
 }
 
+.content-header img {
+    width: 40px;
+    float: left;
+    margin-right: 15px;
+}
+
 .content-header span {
     display: inherit;
 }

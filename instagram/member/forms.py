@@ -28,6 +28,7 @@ class SignUpForm(UserCreationForm):
                     'placeholder': f'{pword}',
                 }
             )
+            self.fields['age'].required = False
 
     class Meta:
         model = User

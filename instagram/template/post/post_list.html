@@ -5,15 +5,16 @@
     {% for post in posts %}
     <div class="post" id="post-{{ post.pk }}">
         <div class="post-header">
-            <form action="{% url 'post:post_delete' pk=post.pk %}" method="post">
-                {% csrf_token %}
-                <p>
-                    <strong>{{ post.author }}</strong>
+            <div class="post-header-wrapper">
+                <img src="/media/{{ post.author.img_profile }}" alt="" class="post-profile-img img-circle">
+                <strong>{{ post.author }}</strong>
+                <form action="{% url 'post:post_delete' pk=post.pk %}" method="post">
+                    {% csrf_token %}
                     {% if request.user == post.author %}
-                    <input type="submit" class="post-delete" value="글 삭제">
+                    <input type="submit" class="post-delete" value="Delete">
                     {% endif %}
-                </p>
-            </form>
+                </form>
+            </div>
         </div>
         <div class="post-photo">
             <a href="{% url 'post:post_detail' pk=post.pk %}"><img src="{{ post.photo.url }}" alt="" class="post-photo-img"></a>

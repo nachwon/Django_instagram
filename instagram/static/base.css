@@ -214,29 +214,4 @@ li {
     border-bottom: 1px solid #ddd;
 }
 
-.post-delete {
-    margin-top: 3px;
-    margin-right: 4px;
-    float: right;
-    border: 0;
-    padding: 0px;
-    background-color: #F44336;
-    color: #F44336;
-    font-weight: bolder;
-    box-shadow: 1px 1px 5px #5f5f5f;
-    width: 25px;
-    height: 15px;
-    vertical-align: middle;
-    border-radius: 60px;
-    transition-duration: 0.4s;
-}
 
-.post-delete:hover {
-    width: 60px;
-    height: 22px;
-    border-radius: 5px;
-    transition-duration: 0.4s;
-    background-color: transparent;
-    color: rgb(109, 109, 109);
-    margin: 0;
-}
