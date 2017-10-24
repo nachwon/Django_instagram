@@ -2,13 +2,13 @@ from typing import NamedTuple
 
 import requests
 from django.conf import settings
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from member.forms import SignUpForm, LoginForm
-
+from member.models import User
 
 
 def signup(request):
@@ -68,6 +68,12 @@ def facebook_login(request):
         scopes: list
         user_id: int
 
+    class UserInfo:
+        def __init__(self, data):
+            self.id = data['id']
+            self.email = data['email']
+            self.url_picture = data['picture']['data']['url']
+
     url_access_token = "https://graph.facebook.com/v2.10/oauth/access_token"
     app_id = settings.FACEBOOK_APP_ID
     app_secret_code = settings.FACEBOOK_SECRET_CODE
@@ -119,8 +125,19 @@ def facebook_login(request):
     }
     response = requests.get(url_graph_user_info, graph_user_params)
     result = response.json()
+    user_info = UserInfo(data=result)
 
-    return HttpResponse(result.items())
+    username = f'fb_{user_info.id}'
+    if User.objects.filter(username=username).exists():
+        user = User.objects.get(username=username)
+    else:
+        user = User.objects.create_user(
+            user_type=User.USER_TYPE_FACEBOOK,
+            username=username,
+        )
+    login(request, user)
+
+    return redirect('post:post_list')
 
 
 def user_logout(request):
