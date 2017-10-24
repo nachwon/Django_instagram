@@ -40,6 +40,14 @@ LOGIN_URL = 'member:login'
 # Facebook
 FACEBOOK_APP_ID = config_secret_common['django']['facebook']['app_id']
 FACEBOOK_SECRET_CODE = config_secret_common['django']['facebook']['secret_code']
+scope_fields = [
+    'user_friends',
+    'public_profile',
+    'email',
+]
+FACEBOOK_SCOPE = {
+    'scope': ','.join(scope_fields)
+}
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
