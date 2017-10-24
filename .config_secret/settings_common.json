@@ -10,6 +10,10 @@
         "USER": "nachwon",
         "PASSWORD": "asdf1234"
       }
+    },
+    "facebook": {
+      "app_id": "524252167924722",
+      "secret_code": "682d522b3b666b63a1feb719533de27d"
     }
   }
 }

@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import json
 import os
 
+f = open(f'{CONFIG_SECRET_DIR}/settings_common.json', 'r')
+key = f.read()
+config_secret_common = json.loads(key)
+f.close()
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT_DIR = os.path.dirname(BASE_DIR)
@@ -31,15 +36,13 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'template')
 AUTH_USER_MODEL = 'member.User'
 LOGIN_URL = 'member:login'
 
+# Facebook
+FACEBOOK_APP_ID = config_secret_common['facebook']['app_id']
+FACEBOOK_SECRET_CODE = config_secret_common['facebook']['secret_code']
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-f = open(f'{CONFIG_SECRET_DIR}/settings_common.json', 'r')
-key = f.read()
-config_secret_common = json.loads(key)
-f.close()
+
 
 SECRET_KEY = config_secret_common['django']['secret_key']
 
