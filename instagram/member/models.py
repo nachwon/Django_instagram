@@ -8,6 +8,7 @@ class UserManager(DjangoUserManager):
 
 
 class User(AbstractUser):
+    nickname = models.CharField(max_length=15, unique=True)
     img_profile = models.ImageField(
         '프로필 사진',
         upload_to='user',

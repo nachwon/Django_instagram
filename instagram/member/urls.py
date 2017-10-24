@@ -6,6 +6,6 @@ urlpatterns = [
     url(r'^signup/$', signup, name='signup'),
     url(r'^login/$', user_login, name='login'),
     url(r'^logout/$', user_logout, name='logout'),
-    url(r'^profile/$', user_profile, name='user_profile'),
     url(r'^facebook-login/$', facebook_login, name='facebook_login'),
+    url(r'^profile/$', user_profile, name='user_profile'),
 ]
