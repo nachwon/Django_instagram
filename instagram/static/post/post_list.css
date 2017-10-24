@@ -32,10 +32,6 @@
     margin: 10px 10px;
 }
 
-.post .post-header a {
-    float: right;
-}
-
 .post .post-header .post-profile-img {
     width: 30px;
     margin-right: 10px;
@@ -70,7 +66,7 @@
 
 .post a {
     text-decoration: none;
-    color: black;
+    color: rgb(33, 33, 33);
 }
 
 .post p {

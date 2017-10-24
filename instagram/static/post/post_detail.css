@@ -8,6 +8,11 @@
     margin-top: 110px;
 }
 
+.detail-wrapper a {
+    text-decoration: none;
+    color: rgb(39, 39, 39);
+}
+
 .content-container {
     width: 335px;
     height: 100%;
@@ -33,4 +38,5 @@
 .detail-wrapper .detail-photo {
     width: 598px;
 }
+
 

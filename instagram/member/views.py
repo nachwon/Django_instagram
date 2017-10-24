@@ -145,6 +145,9 @@ def user_logout(request):
     return redirect('post:post_list')
 
 
-def user_profile(request):
-    if request.user.is_authenticated:
-        return render(request, 'member/profile.html')
+def user_profile(request, pk):
+    user = User.objects.get(pk=pk)
+    context = {
+        'profile_user': user
+    }
+    return render(request, 'member/profile.html', context)

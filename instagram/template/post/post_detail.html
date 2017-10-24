@@ -7,7 +7,7 @@
     <div class="content-container">
         <div class="content-header">
             <img src="/media/{{ post.author.img_profile }}" alt="" class="post-profile-img img-circle">
-            <span><strong>{{ post.author }}</strong></span>
+            <a href="{% url 'member:user_profile' pk=post.author.pk %}"><span><strong>{{ post.author }}</strong></span></a>
             <span>Location</span>
         </div>
         <div class="content-body">
@@ -18,7 +18,7 @@
                 <div class="comment">
                     <form action="{% url 'post:comment_delete' pk=post.pk comment_pk=comment.pk %}" method="post">
                         <p>
-                            <strong>{{ comment.author }} </strong>{{ comment.content }}
+                            <a href="{% url 'member:user_profile' pk=comment.author.pk %}"><strong>{{ comment.author }} </strong></a>{{ comment.content }}
                             {% csrf_token %}
                             {% if comment.author == request.user %}
                             <input type="submit" class="delete-comment" value="X"><span></span></input>

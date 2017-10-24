@@ -7,7 +7,7 @@
         <div class="post-header">
             <div class="post-header-wrapper">
                 <img src="/media/{{ post.author.img_profile }}" alt="" class="post-profile-img img-circle">
-                <strong>{{ post.author }}</strong>
+                <a href="{% url 'member:user_profile' pk=post.author.pk %}"><strong>{{ post.author }}</strong></a>
                 <form action="{% url 'post:post_delete' pk=post.pk %}" method="post">
                     {% csrf_token %}
                     {% if request.user == post.author %}
@@ -52,14 +52,14 @@
                 {% endif %}
             </div>
             <div class="content">
-                <p><span class="content-author">{{ post.author }} </span>{{ post.content }}</p>
+                <p><a href="{% url 'member:user_profile' pk=post.author.pk %}"><span class="content-author">{{ post.author }} </span></a>{{ post.content }}</p>
             </div>
             <div class="post-comment">
                 {% for comment in post.comments.all %}
                 <div class="comment">
                     <form action="{% url 'post:comment_delete' pk=post.pk comment_pk=comment.pk %}" method="post">
                         <p>
-                            <strong>{{ comment.author }} </strong>{{ comment.content }}
+                            <a href="{% url 'member:user_profile' pk=comment.author.pk %}"><strong>{{ comment.author }} </strong></a>{{ comment.content }}
                             {% csrf_token %}
                             {% if comment.author == request.user %}
                             <input type="submit" class="delete-comment" value="X"><span></span></input>

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{% static 'member/signup.css' %}">
     <link rel="stylesheet" href="{% static 'member/profile.css' %}">
     <link rel="shortcut icon" href="/media/favicon.png">
+    <script src="{% static 'jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'post/post.js' %}"></script>
     <title>Instagram</title>
 </head>
@@ -29,7 +30,7 @@
                 <li>
                     <div class="icon-wrapper" >
                         {% if user.is_authenticated %}
-                        <span class="current-username"><a href="{% url 'member:user_profile' %}">{{ user.username }}</a></span>
+                        <span class="current-username"><a href="{% url 'member:user_profile' pk=user.pk %}">{{ user.username }}</a></span>
                         <a href="{% url 'member:logout' %}"><span class="user-btn login glyphicon glyphicon-log-out" aria-hidden="true"></span></a>
                         {% else %}
                         <a href="{% url 'member:login' %}"><span class="user-btn login glyphicon glyphicon-log-in" aria-hidden="true"></span></a>
