@@ -74,6 +74,18 @@ li {
     font-weight: bolder;
     margin-right: 20px;
 }
+
+.user-list-btn {
+    width: 24px;
+    height: 24px;
+    background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/13cecc35f7af.png);
+    background-position: -387px -104px;
+    border: 0;
+    background-color: transparent;
+    vertical-align: middle;
+}
+
+
 /* header end */
 /* img start*/
 .post-photo-img {
@@ -135,6 +147,7 @@ li {
     font-size: 20px;
     margin: 0 10px;
     color: rgb(53, 53, 53);
+    top: -1px;
 }
 
 .post-add {

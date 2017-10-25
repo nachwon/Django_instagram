@@ -7,9 +7,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <link rel="stylesheet" href="{% static '403.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'post/post_list.css' %}">
     <link rel="stylesheet" href="{% static 'post/post_add.css' %}">
     <link rel="stylesheet" href="{% static 'post/post_detail.css' %}">
@@ -31,6 +31,7 @@
                     <div class="icon-wrapper" >
                         {% if user.is_authenticated %}
                         <span class="current-username"><a href="{% url 'member:user_profile' pk=user.pk %}">{{ user.username }}</a></span>
+                        <button class="user-list-btn" onclick="document.getElementById('all-users-list').style.display='block'"></button>
                         <a href="{% url 'member:logout' %}"><span class="user-btn login glyphicon glyphicon-log-out" aria-hidden="true"></span></a>
                         {% else %}
                         <a href="{% url 'member:login' %}"><span class="user-btn login glyphicon glyphicon-log-in" aria-hidden="true"></span></a>
@@ -50,5 +51,33 @@
     {% else %}
     {% include 'member/login_main.html' %}
     {% endif %}
+
+<div id="all-users-list" class="dim-layer">
+    <div class="dimBg"></div>
+    <div id="layer1" class="pop-layer">
+        <div class="follow-title">
+            <span>모든 유저</span>
+        </div>
+        <div class="pop-container">
+            <div class="pop-conts">
+                {% for i in all_users %}
+                <div class="follow-user">
+                    <img src="/media/{{ i.img_profile }}" alt="" class="user-profile-img img-circle">
+                    <div class="name-wrapper">
+                        <span><strong>{{ i.username }}</strong></span>
+                        <span>{{ i.nickname }}</span>
+                    </div>
+                    {% if i not in request.user.following.all %}
+                        <a class="btn btn-default" href="">팔로우</a>
+                    {% else %}
+                        <a class="btn btn-primary" href="">팔로잉</a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <button class="popup-close btn btn-default" onclick="document.getElementById('all-users-list').style.display='none'">close</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>

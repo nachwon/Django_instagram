@@ -2,12 +2,15 @@
 from django.core.exceptions import PermissionDenied
 from member.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+
+from member.models import User
 from post.models import Post, PostComment, PostLike
 from .forms import PostAddForm
 
 
 def post_list(request):
     if request.user.is_authenticated:
+        all_users = User.objects.all().exclude(pk=request.user.pk)
         user = request.user
         user_posts = user.post_set.all()
         following_users = user.following.all()
@@ -26,6 +29,7 @@ def post_list(request):
         'posts': posts,
         'liked': like_list,
         'user': user,
+        'all_users': all_users
     }
     return render(request, 'post/post_list.html', context)
 

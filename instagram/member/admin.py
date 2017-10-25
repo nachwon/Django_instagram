@@ -19,6 +19,8 @@ class UserAdmin(BaseUserAdmin):
         ('추가 정보', {
             'fields': (
                 'nickname',
+                'first_name',
+                'last_name',
                 'img_profile',
                 'age',
             )
