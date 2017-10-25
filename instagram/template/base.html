@@ -62,7 +62,7 @@
             <div class="pop-conts">
                 {% for i in all_users %}
                 <div class="follow-user">
-                    <img src="/media/{{ i.img_profile }}" alt="" class="user-profile-img img-circle">
+                    <div style="background-image: url(/media/{{ i.img_profile }})" class="post-profile-img all-users img-circle"></div>
                     <div class="name-wrapper">
                         <span><strong>{{ i.username }}</strong></span>
                         <span>{{ i.nickname }}</span>

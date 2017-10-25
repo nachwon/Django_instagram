@@ -32,9 +32,18 @@
     margin: 10px 10px;
 }
 
-.post .post-header .post-profile-img {
+.post-profile-img {
     width: 30px;
     margin-right: 10px;
+    background-size: cover;
+    height: 30px;
+    background-position: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.all-users {
+    float: left;
 }
 
 .post-delete {

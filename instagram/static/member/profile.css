@@ -19,7 +19,11 @@
 
 .profile-img {
     width: 152px;
+    height: 152px;
+    background-size: cover;
     float: left;
+    box-shadow: 1px 1px 34px -10px rgb(0, 0, 0);
+    background-position: center;
 }
 
 .profile-content .profile-info {
