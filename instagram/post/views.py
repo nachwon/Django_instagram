@@ -8,12 +8,17 @@ from .forms import PostAddForm
 
 def post_list(request):
     if request.user.is_authenticated:
-        posts = Post.objects.all()
         user = request.user
+        user_posts = user.post_set.all()
+        following_users = user.following.all()
+        for following_user in following_users:
+            user_posts = user_posts.union(following_user.post_set.all())
+        posts = user_posts.order_by('-created_date')
+        print(posts)
         liked = user.postlike_set.all()
         like_list = [i.post_id for i in liked]
     else:
-        posts = Post.objects.all()
+        posts = None
         user = request.user
         like_list = None
 
