@@ -68,9 +68,9 @@
                         <span>{{ i.nickname }}</span>
                     </div>
                     {% if i not in request.user.following.all %}
-                        <a class="btn btn-default" href="">팔로우</a>
+                        <a class="btn btn-default" href="{% url 'member:follow_toggle' pk=i.pk %}">팔로우</a>
                     {% else %}
-                        <a class="btn btn-primary" href="">팔로잉</a>
+                        <a class="btn btn-primary" href="{% url 'member:follow_toggle' pk=i.pk %}">팔로잉</a>
                     {% endif %}
                 </div>
                 {% endfor %}

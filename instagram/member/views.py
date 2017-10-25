@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from member.forms import SignUpForm, LoginForm
-from member.models import User
+from member.models import User, Relationship
 
 
 def signup(request):
@@ -146,8 +146,21 @@ def user_logout(request):
 
 
 def user_profile(request, pk):
+    all_users = User.objects.all().exclude(pk=request.user.pk)
     user = User.objects.get(pk=pk)
     context = {
-        'profile_user': user
+        'profile_user': user,
+        'all_users': all_users,
     }
     return render(request, 'member/profile.html', context)
+
+
+def follow_toggle(request, pk):
+    relation = Relationship.objects.filter(from_user=request.user, to_user=User.objects.get(pk=pk))
+    if relation.exists():
+        relation.delete()
+    else:
+        Relationship.objects.create(from_user=request.user,
+                                    to_user=User.objects.get(pk=pk))
+    url = request.META['HTTP_REFERER']
+    return redirect(url)

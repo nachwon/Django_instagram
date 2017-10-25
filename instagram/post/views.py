@@ -24,6 +24,7 @@ def post_list(request):
         posts = None
         user = request.user
         like_list = None
+        all_users = None
 
     context = {
         'posts': posts,
@@ -36,6 +37,7 @@ def post_list(request):
 
 def post_detail(request, pk):
     if request.user.is_authenticated:
+        all_users = User.objects.all().exclude(pk=request.user.pk)
         post = get_object_or_404(Post, pk=pk)
         user = request.user
         liked = user.postlike_set.all()
@@ -48,6 +50,7 @@ def post_detail(request, pk):
         'post': post,
         'user': user,
         'liked': liked_list,
+        'all_users': all_users,
     }
     return render(request, 'post/post_detail.html', context)
 
@@ -78,8 +81,10 @@ def post_add(request):
             return redirect('post:post_list')
     else:
         form = PostAddForm()
+    all_users = User.objects.all().exclude(pk=request.user.pk)
     context = {
-        'form': form
+        'form': form,
+        'all_users': all_users,
     }
     return render(request, 'post/post_add.html', context)
 

@@ -35,6 +35,7 @@
         </div>
     </div>
 </div>
+
 <div id="following" class="dim-layer">
     <div class="dimBg"></div>
     <div id="layer2" class="pop-layer">
@@ -50,7 +51,12 @@
                         <span><strong>{{ i.username }}</strong></span>
                         <span>{{ i.nickname }}</span>
                     </div>
-                    <a class="btn btn-primary" href="">팔로잉</a>
+                    {% if i not in request.user.following.all and i.pk != request.user.pk %}
+                        <a class="btn btn-default" href="{% url 'member:follow_toggle' pk=i.pk %}">팔로우</a>
+                    {% elif i.pk == request.user.pk %}
+                    {% else %}
+                        <a class="btn btn-primary" href="{% url 'member:follow_toggle' pk=i.pk %}">팔로잉</a>
+                    {% endif %}
                 </div>
                 {% endfor %}
             </div>
@@ -74,10 +80,11 @@
                         <span><strong>{{ i.username }}</strong></span>
                         <span>{{ i.nickname }}</span>
                     </div>
-                    {% if i not in profile_user.following.all %}
-                        <a class="btn btn-default" href="">팔로우</a>
+                    {% if i not in request.user.following.all and i.pk != request.user.pk %}
+                        <a class="btn btn-default" href="{% url 'member:follow_toggle' pk=i.pk %}">팔로우</a>
+                    {% elif i.pk == request.user.pk %}
                     {% else %}
-                        <a class="btn btn-primary" href="">팔로잉</a>
+                        <a class="btn btn-primary" href="{% url 'member:follow_toggle' pk=i.pk %}">팔로잉</a>
                     {% endif %}
                 </div>
                 {% endfor %}
