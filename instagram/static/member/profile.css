@@ -149,7 +149,7 @@
 .pop-layer {
     display: none;
     position: absolute;
-    top: 15%;
+    top: 5%;
     left: calc(50% - (410px)/2);
     width: 410px;
     height: auto;
@@ -187,6 +187,7 @@
 
 .pop-conts {
     overflow-y: scroll;
+    height: 400px;
 }
 
 a.btn-layerClose {

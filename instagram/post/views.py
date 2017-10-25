@@ -17,7 +17,6 @@ def post_list(request):
         for following_user in following_users:
             user_posts = user_posts.union(following_user.post_set.all())
         posts = user_posts.order_by('-created_date')
-        print(posts)
         liked = user.postlike_set.all()
         like_list = [i.post_id for i in liked]
     else:

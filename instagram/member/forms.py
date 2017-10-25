@@ -65,6 +65,13 @@ class SignUpForm(UserCreationForm):
             )
         }
 
+    def clean_username(self):
+        cleaned_data = super().clean()
+        if cleaned_data['username'][:2] == 'fb_':
+            raise forms.ValidationError('유효하지 않은 아이디입니다.')
+        else:
+            return cleaned_data
+
 
 class LoginForm(forms.Form):
     """
