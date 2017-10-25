@@ -6,7 +6,8 @@
     <img src="{{ post.photo.url }}" alt="" class="post-photo-img">
     <div class="content-container">
         <div class="content-header">
-            <img src="/media/{{ post.author.img_profile }}" alt="" class="post-profile-img img-circle">
+            <div style="background-image: url(/media/{{ post.author.img_profile }})"
+                 class="post-profile-img img-circle detail-img"></div>
             <a href="{% url 'member:user_profile' pk=post.author.pk %}"><span><strong>{{ post.author }}</strong></span></a>
             <span>Location</span>
         </div>
