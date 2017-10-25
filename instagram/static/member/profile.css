@@ -67,7 +67,7 @@
     margin: 0 auto;
 }
 
-.post-thumbnails .photos img {
+.post-thumbnails .photos .thumb-img {
     width: 200px;
     height: 200px;
     float: left;
@@ -76,12 +76,53 @@
     padding: 3px;
     border-radius: 3px;
     transition-duration: 0.5s;
+    background-size: cover;
 }
 
-.post-thumbnails .photos img:hover {
-    border: 1px solid rgb(13, 123, 167);
+.post-thumbnails .photos .thumb-img:hover {
+    border: 1px solid rgb(51, 196, 253);
     transition-duration: 0.5s;
 }
+
+.post-thumbnails .photos .mask {
+    height: 192px;
+    width: 192px;
+    background-color: transparent;
+    transition-duration: 0.4s;
+    border-radius: 3px;
+}
+
+.post-thumbnails .photos .mask:hover {
+    height: 192px;
+    width: 192px;
+    background-color: black;
+    opacity: 0.5;
+    transition-duration: 0.4s;
+}
+
+.post-thumbnails .photos .thumb-info-wrapper {
+    line-height: 192px;
+    text-align: center;
+    color: transparent;
+    transition-duration: 0.4s;
+}
+.post-thumbnails .photos .thumb-info-wrapper:hover {
+    line-height: 192px;
+    text-align: center;
+    color: white;
+    transition-duration: 0.4s;
+}
+
+.post-thumbnails .photos .thumb-info-wrapper .like-number::before {
+    font-family: FontAwesome;
+    content: '\f004';
+}
+
+.post-thumbnails .photos .thumb-info-wrapper .comment-number::before {
+    font-family: FontAwesome;
+    content: '\f086';
+}
+
 
 /* layer follow */
 

@@ -27,7 +27,14 @@
             {% for post in profile_user.post_set.all %}
                 <div class="photos">
                     <a href="{% url 'post:post_detail' pk=post.pk %}">
-                        <img src="/media/{{ post.photo }}" alt="">
+                        <div class="thumb-img" style="background-image: url(/media/{{ post.photo }})" alt="">
+                            <div class="mask">
+                                <div class="thumb-info-wrapper">
+                                    <span class="like-number"> {{ post.liked.count }}</span>
+                                    <span class="comment-number"> {{ post.comments.count }}</span>
+                                </div>
+                            </div>
+                        </div>
                     </a>
                 </div>
             {% endfor %}
