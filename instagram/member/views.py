@@ -135,6 +135,7 @@ def facebook_login(request):
             user_type=User.USER_TYPE_FACEBOOK,
             username=username,
         )
+
     login(request, user)
 
     return redirect('post:post_list')
