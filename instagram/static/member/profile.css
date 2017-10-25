@@ -143,6 +143,9 @@
 
 .pop-conts .follow-user .user-profile-img {
     width: 30px;
+    height: 30px;
+    background-size: cover;
+    background-position: center;
     margin-right: 10px;
     float: left;
 }

@@ -53,7 +53,7 @@
             <div class="pop-conts">
                 {% for i in profile_user.following.all %}
                 <div class="follow-user">
-                    <img src="/media/{{ i.img_profile }}" alt="" class="user-profile-img img-circle">
+                    <div style="background-image: url(/media/{{ i.img_profile }})" class="user-profile-img img-circle"></div>
                     <div class="name-wrapper">
                         <span><strong>{{ i.username }}</strong></span>
                         <span>{{ i.nickname }}</span>
@@ -82,7 +82,7 @@
             <div class="pop-conts">
                 {% for i in profile_user.followers.all %}
                 <div class="follow-user">
-                    <img src="/media/{{ i.img_profile }}" alt="" class="user-profile-img img-circle">
+                    <div style="background-image: url(/media/{{ i.img_profile }})" alt="" class="user-profile-img img-circle"></div>
                     <div class="name-wrapper">
                         <span><strong>{{ i.username }}</strong></span>
                         <span>{{ i.nickname }}</span>

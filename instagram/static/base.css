@@ -93,6 +93,7 @@ li {
     width: 598px;
     float: left;
     background-repeat: no-repeat;
+    border-bottom: 1px solid #ddd;
 }
 /* img end */
 /* buttons start*/
