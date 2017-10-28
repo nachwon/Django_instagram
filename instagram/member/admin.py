@@ -4,6 +4,12 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from member.models import User as CustomUser, Relationship
 
 
+class RelationshipInline(admin.TabularInline):
+    model = Relationship
+    fk_name = 'from_user'
+    extra = 1
+
+
 class UserAdmin(BaseUserAdmin):
     fieldsets = BaseUserAdmin.fieldsets + (
         ('추가 정보', {
@@ -11,7 +17,7 @@ class UserAdmin(BaseUserAdmin):
                 'nickname',
                 'img_profile',
                 'age',
-                'user_type'
+                'user_type',
             )
         }),
     )
@@ -26,6 +32,7 @@ class UserAdmin(BaseUserAdmin):
             )
         }),
     )
+    inlines = (RelationshipInline,)
 
 
 admin.site.register(CustomUser, UserAdmin)
