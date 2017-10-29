@@ -4,11 +4,11 @@
     "databases": {
       "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": "localhost",
+        "HOST": "che1-db.czxnimwgemge.ap-northeast-2.rds.amazonaws.com",
         "POST": "5432",
-        "NAME": "instagram",
-        "USER": "nachwon",
-        "PASSWORD": "asdf1234"
+        "NAME": "deploy",
+        "USER": "Che1",
+        "PASSWORD": "mgame123"
       }
     },
     "facebook": {
