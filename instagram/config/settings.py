@@ -18,14 +18,32 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT_DIR = os.path.dirname(BASE_DIR)
 CONFIG_SECRET_DIR = os.path.join(ROOT_DIR, '.config_secret')
 
+# secret information
 f = open(f'{CONFIG_SECRET_DIR}/settings_common.json', 'r')
 key = f.read()
 config_secret_common = json.loads(key)
 f.close()
 
+# AWS
+AWS_ACCESS_KEY_ID = config_secret_common['aws']['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = config_secret_common['aws']['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = config_secret_common['aws']['AWS_STORAGE_BUCKET_NAME']
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_REGION_NAME = 'ap-northeast-2'
+
+# AWS Storage
+STATICFILES_LOCATION = 'static'
+MEDIAFILES_LOCATION = 'media'
+
+# S3 FileStorage
+DEFAULT_FILE_STORAGE = 'config.storages.MediaStorage'
+STATICFILES_STORAGE = 'config.storages.StaticStorage'
+
+# media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# static files
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
@@ -33,6 +51,7 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(ROOT_DIR, '.static_root')
 
+# template files
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'template')
 
 AUTH_USER_MODEL = 'member.User'
@@ -50,12 +69,8 @@ FACEBOOK_SCOPE = {
     'scope': ','.join(scope_fields)
 }
 
-
 # SECURITY WARNING: keep the secret key used in production secret!
-
-
 SECRET_KEY = config_secret_common['django']['secret_key']
-
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -63,6 +78,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '.ap-northeast-2.compute.amazonaws.com',
+    '.che1.kr',
 ]
 
 
@@ -77,6 +93,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_extensions',
+    'storages',
 
     'post',
     'member',

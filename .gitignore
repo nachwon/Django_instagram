@@ -9,6 +9,7 @@ __pycache__/
 local_settings.py
 db.sqlite3
 media
+.config_secret
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
@@ -197,5 +198,6 @@ venv.bak/
 .idea
 .json
 .config_secret/
+credentials.csv
 
 # End of https://www.gitignore.io/api/linux,python,django,pycharm

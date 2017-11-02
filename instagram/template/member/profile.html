@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="profile-content">
     <div class="profile-container">
         <div class="profile-head">
-            <div style="background-image: url(/media/{{ profile_user.img_profile }});" class="profile-img img-circle"></div>
+            <div style="background-image: url({{ profile_user.img_profile.url }});" class="profile-img img-circle"></div>
             <div class="profile-info">
                 <span class="username">{{ profile_user.username }}</span>
                 <div class="info-wrapper">
@@ -27,7 +28,7 @@
             {% for post in profile_user.post_set.all %}
                 <div class="photos">
                     <a href="{% url 'post:post_detail' pk=post.pk %}">
-                        <div class="thumb-img" style="background-image: url(/media/{{ post.photo }})" alt="">
+                        <div class="thumb-img" style="background-image: url({{ post.photo.url }})" alt="">
                             <div class="mask">
                                 <div class="thumb-info-wrapper">
                                     <span class="like-number"> {{ post.liked.count }}</span>
@@ -53,7 +54,7 @@
             <div class="pop-conts">
                 {% for i in profile_user.following.all %}
                 <div class="follow-user">
-                    <div style="background-image: url(/media/{{ i.img_profile }})" class="user-profile-img img-circle"></div>
+                    <div style="background-image: url({{ i.img_profile.url }})" class="user-profile-img img-circle"></div>
                     <div class="name-wrapper">
                         <span><strong>{{ i.username }}</strong></span>
                         <span>{{ i.nickname }}</span>
@@ -82,7 +83,7 @@
             <div class="pop-conts">
                 {% for i in profile_user.followers.all %}
                 <div class="follow-user">
-                    <div style="background-image: url(/media/{{ i.img_profile }})" alt="" class="user-profile-img img-circle"></div>
+                    <div style="background-image: url({{ i.img_profile.url }})" alt="" class="user-profile-img img-circle"></div>
                     <div class="name-wrapper">
                         <span><strong>{{ i.username }}</strong></span>
                         <span>{{ i.nickname }}</span>

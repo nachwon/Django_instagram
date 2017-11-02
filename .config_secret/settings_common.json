@@ -4,9 +4,9 @@
     "databases": {
       "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": "che1-db.czxnimwgemge.ap-northeast-2.rds.amazonaws.com",
+        "HOST": "che1-database.czxnimwgemge.ap-northeast-2.rds.amazonaws.com",
         "POST": "5432",
-        "NAME": "deploy",
+        "NAME": "Che1db",
         "USER": "Che1",
         "PASSWORD": "mgame123"
       }
@@ -15,5 +15,10 @@
       "app_id": "524252167924722",
       "secret_code": "682d522b3b666b63a1feb719533de27d"
     }
+  },
+  "aws": {
+    "AWS_ACCESS_KEY_ID": "AKIAJOP4E4KWP3XYGMEA",
+    "AWS_SECRET_ACCESS_KEY": "",
+    "AWS_STORAGE_BUCKET_NAME": "che1-test"
   }
 }

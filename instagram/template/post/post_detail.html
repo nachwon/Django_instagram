@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="detail-wrapper">
@@ -6,7 +7,7 @@
     <img src="{{ post.photo.url }}" alt="" class="post-photo-img">
     <div class="content-container">
         <div class="content-header">
-            <div style="background-image: url(/media/{{ post.author.img_profile }})"
+            <div style="background-image: url({{ post.author.img_profile.url }})"
                  class="post-profile-img img-circle detail-img"></div>
             <a href="{% url 'member:user_profile' pk=post.author.pk %}"><span><strong>{{ post.author }}</strong></span></a>
             <span>Location</span>
@@ -24,7 +25,6 @@
                             {% if comment.author == request.user %}
                             <input type="submit" class="delete-comment" value="X"><span></span></input>
                             {% endif %}
-
                         </p>
                     </form>
                 </div>

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'member/signup.css' %}">
     <link rel="stylesheet" href="{% static 'member/profile.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="/media/favicon.png">
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}">
     <script src="{% static 'jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'post/post.js' %}"></script>
     <title>Instagram</title>
@@ -26,7 +26,7 @@
         <div id="insta-head-wrapper" class="header-wrapper">
             <ul class="head-ul">
                 <li>
-                    <a href="{% url 'post:post_list' %}"><img class="insta-icon" src="https://png.icons8.com/instagram/win10/1600" alt=""><img id="insta-logo" class="insta-logo" src="/media/insta-logo.png" alt=""></a>
+                    <a href="{% url 'post:post_list' %}"><img class="insta-icon" src="https://png.icons8.com/instagram/win10/1600" alt=""><img id="insta-logo" class="insta-logo" src="{% static 'insta-logo.png' %}" alt=""></a>
                 </li>
                 <li>
                     <div class="icon-wrapper" >
@@ -47,7 +47,7 @@
     {% endblock %}
     {% if request.user.is_authenticated %}
     <div class="post-add">
-        <a href="{% url 'post:post_add' %}"><img src="/media/favicon.png" alt=""></a>
+        <a href="{% url 'post:post_add' %}"><img src="{% static 'favicon.png' %}" alt=""></a>
     </div>
     {% else %}
     {% include 'member/login_main.html' %}
@@ -63,7 +63,7 @@
             <div class="pop-conts">
                 {% for i in all_users %}
                 <div class="follow-user">
-                    <div style="background-image: url(/media/{{ i.img_profile }})" class="post-profile-img all-users img-circle"></div>
+                    <div style="background-image: url({{ i.img_profile.url }})" class="post-profile-img all-users img-circle"></div>
                     <div class="name-wrapper">
                         <span><strong>{{ i.username }}</strong></span>
                         <span>{{ i.nickname }}</span>
