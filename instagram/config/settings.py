@@ -36,8 +36,8 @@ STATICFILES_LOCATION = 'static'
 MEDIAFILES_LOCATION = 'media'
 
 # S3 FileStorage
-DEFAULT_FILE_STORAGE = 'config.storages.MediaStorage'
-STATICFILES_STORAGE = 'config.storages.StaticStorage'
+# DEFAULT_FILE_STORAGE = 'config.storages.MediaStorage'
+# STATICFILES_STORAGE = 'config.storages.StaticStorage'
 
 # media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -137,7 +137,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 
-DATABASES = config_secret_common['django']['databases']
+# DATABASES = config_secret_common['django']['databases']
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 # Password validation

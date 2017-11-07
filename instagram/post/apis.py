@@ -1,1 +1,4 @@
-class PostList()
+from rest_framework.views import APIView
+
+
+class PostList(APIView):
