@@ -1,3 +1,4 @@
+import filecmp
 import io
 from random import randint
 
@@ -89,5 +90,8 @@ class PostListViewTest(APILiveServerTestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['author'], test_user.pk)
         self.assertEqual(Post.objects.count(), 1)
+
+        post = Post.objects.get(pk=response.data['pk'])
+        self.assertTrue(filecmp.cmp(f, post.photo.file.name))
 
 
