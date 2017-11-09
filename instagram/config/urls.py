@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from config.views import redirect_to_main
-from post.apis import PostList
+from post.apis import PostList, PostDetail
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^post/', include('post.urls', namespace='post')),
     url(r'^member/', include('member.urls', namespace='member')),
 
-    url(r'^api/posts/$', PostList.as_view(), name='post_list')
+    url(r'^api/posts/$', PostList.as_view(), name='post_list'),
+    url(r'^api/posts/(?P<pk>\d+)$', PostDetail.as_view(), name='post_detail')
 ]
 
 urlpatterns += static(
