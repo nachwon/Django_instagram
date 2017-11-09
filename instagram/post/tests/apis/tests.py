@@ -1,15 +1,16 @@
 import io
 from random import randint
 
+import os
 from PIL import Image
 from django.contrib.auth import get_user_model
 from django.core.files import File
-from django.core.files.temp import NamedTemporaryFile
 from django.urls import reverse, resolve
 from io import BytesIO
 from rest_framework import status
-from rest_framework.test import APIRequestFactory, APITestCase, APILiveServerTestCase
+from rest_framework.test import APIRequestFactory, APITestCase, APILiveServerTestCase, force_authenticate
 
+from config import settings
 from post.apis import PostList
 from post.models import Post
 
@@ -69,19 +70,24 @@ class PostListViewTest(APILiveServerTestCase):
         for i in range(num_posts):
             self.create_post(author=user)
 
-    # def test_api_post(self):
-    #     factory = APIRequestFactory()
-    #     User.objects.create_user(username='che1', nickname='test')
-    #     f = File(BytesIO())
-    #     request = factory.post('/api/posts/', {'content': 'hello', 'photo': f})
-    #
-    #     view = PostList.as_view()
-    #     response = view(request)
-    #
-    #     print(response.data)
-    #
-    #     p = Post.objects.first()
-    #
-    #     print(p)
+    def test_api_post(self):
+        factory = APIRequestFactory()
+        user = self.create_user()
+        f = os.path.join(settings.MEDIA_ROOT, 'post', 'favicon.png')
+        with open(f, 'rb') as photo:
+            request = factory.post('/api/posts/', {'content': 'hello', 'photo': photo})
+        force_authenticate(request, user=user)
+
+        view = PostList.as_view()
+        response = view(request)
+
+        print(response.data)
+
+        test_user = User.objects.get(pk=1)
+
+        self.assertEqual(response.data['content'], 'hello')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['author'], test_user.pk)
+        self.assertEqual(Post.objects.count(), 1)
 
 
