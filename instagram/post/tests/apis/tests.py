@@ -21,6 +21,15 @@ class PostListViewTest(APILiveServerTestCase):
     URL_API_POST_LIST = '/api/posts/'
     VIEW_CLASS = PostList
 
+    @staticmethod
+    def create_user(username='dummy'):
+        return User.objects.create_user(username=username)
+
+    @staticmethod
+    def create_post(author=None):
+        f = File(BytesIO())
+        Post.objects.create(photo=f, author=author)
+
     def test_post_list_url_name_reverse(self):
         url = reverse(self.URL_API_POST_LIST_NAME)
         self.assertEqual(url, self.URL_API_POST_LIST)
@@ -33,10 +42,10 @@ class PostListViewTest(APILiveServerTestCase):
 
     def test_get_post_list(self):
         num = randint(0, 20)
-        f = File(BytesIO())
-        user = User.objects.create_user(username='che1')
+        user = self.create_user()
         for i in range(num):
-            Post.objects.create(photo=f, author=user)
+            self.create_post(author=user)
+
         url = reverse(self.URL_API_POST_LIST_NAME)
         response = self.client.get(url)
 
@@ -51,6 +60,28 @@ class PostListViewTest(APILiveServerTestCase):
             self.assertIn('photo', cur_post_data)
             self.assertIn('created_date', cur_post_data)
 
+    def test_get_post_list_exclude_author_is_none(self):
+        user = self.create_user()
+        num_author_none_posts = randint(1, 10)
+        num_posts = randint(11, 20)
+        for i in range(num_author_none_posts):
+            self.create_post()
+        for i in range(num_posts):
+            self.create_post(author=user)
 
+    # def test_api_post(self):
+    #     factory = APIRequestFactory()
+    #     User.objects.create_user(username='che1', nickname='test')
+    #     f = File(BytesIO())
+    #     request = factory.post('/api/posts/', {'content': 'hello', 'photo': f})
+    #
+    #     view = PostList.as_view()
+    #     response = view(request)
+    #
+    #     print(response.data)
+    #
+    #     p = Post.objects.first()
+    #
+    #     print(p)
 
 
