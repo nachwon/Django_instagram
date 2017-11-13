@@ -97,6 +97,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'storages',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
 
     'post',
