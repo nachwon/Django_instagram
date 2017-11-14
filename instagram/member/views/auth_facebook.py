@@ -2,6 +2,7 @@ from typing import NamedTuple
 
 import requests
 from django.conf import settings
+
 from django.contrib.auth import login
 from django.http import JsonResponse
 from django.shortcuts import redirect
@@ -15,6 +16,7 @@ __all__ = (
     'facebook_login',
     'FrontFacebookLogin',
 )
+
 
 def facebook_login(request):
     class AccessTokenInfo(NamedTuple):
@@ -41,6 +43,7 @@ def facebook_login(request):
     url_access_token = "https://graph.facebook.com/v2.10/oauth/access_token"
     app_id = settings.FACEBOOK_APP_ID
     app_secret_code = settings.FACEBOOK_SECRET_CODE
+    print(f'secret: {app_secret_code}')
     redirect_uri = '{scheme}://{host}{relative_url}'.format(
         scheme=request.scheme,
         host=request.META['HTTP_HOST'],
@@ -92,12 +95,14 @@ def facebook_login(request):
     user_info = UserInfo(data=result)
 
     username = f'fb_{user_info.id}'
+
     if User.objects.filter(username=username).exists():
         user = User.objects.get(username=username)
     else:
         user = User.objects.create_user(
             user_type=User.USER_TYPE_FACEBOOK,
             username=username,
+            nickname=user_info.id
         )
 
     login(request, user)
@@ -129,7 +134,7 @@ class FrontFacebookLogin(View):
 
     def get(self, request):
         app_id = settings.FACEBOOK_APP_ID
-        app_secret_code = settings.FACEBOOK_APP_SECRET_CODE
+        app_secret_code = settings.FACEBOOK_SECRET_CODE
         app_access_token = f'{app_id}|{app_secret_code}'
         code = request.GET.get('code')
 

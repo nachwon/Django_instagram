@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser, UserManager as DjangoUserManager
 from django.db import models
+from rest_framework.authtoken.models import Token
 
 
 class UserManager(DjangoUserManager):
@@ -8,7 +9,7 @@ class UserManager(DjangoUserManager):
 
 
 class User(AbstractUser):
-    nickname = models.CharField(max_length=15, unique=True)
+    nickname = models.CharField(max_length=15)
     img_profile = models.ImageField(
         '프로필 사진',
         upload_to='user',
@@ -42,6 +43,10 @@ class User(AbstractUser):
     class Meta:
         verbose_name = '사용자'
         verbose_name_plural = f'{verbose_name} 목록'
+
+    @property
+    def token(self):
+        return Token.objects.get_or_create(user=self)[0].key
 
     def follow_toggle(self, user):
         if not isinstance(user, User):

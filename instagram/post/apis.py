@@ -1,6 +1,6 @@
-from rest_framework import status, generics, mixins
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import generics, mixins, permissions
+from utils import permissions as custom_permissions
+
 
 from post.models import Post
 from post.serializer import PostSerializer
@@ -9,6 +9,9 @@ from post.serializer import PostSerializer
 class PostList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+    )
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -20,8 +23,14 @@ class PostList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericA
         serializer.save(author=self.request.user)
 
 
-class PostDetail(APIView):
-    def get(self, request, pk):
-        post = Post.objects.get(pk=pk)
-        serializer = PostSerializer(post)
-        return Response(serializer.data)
+class PostDetail(generics.RetrieveDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = (
+        custom_permissions.IsAuthorOrReadOnly,
+    )
+
+
+class PostLikeToggle(generics.GenericAPIView):
+    def post(self, request, *args, **kwargs):
+        instance = self.get_object()

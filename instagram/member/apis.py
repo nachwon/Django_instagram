@@ -2,11 +2,6 @@ from typing import NamedTuple
 
 import requests
 from django.conf import settings
-from django.contrib.auth import login
-from django.http import HttpResponse
-from django.shortcuts import redirect
-from django.urls import reverse
-from django.views import View
 from rest_framework import status
 from rest_framework.compat import authenticate
 from rest_framework.exceptions import APIException
@@ -68,7 +63,7 @@ class FacebookLogin(APIView):
         # token(access_token)을 받아 해당 토큰을 Debug
         def get_debug_token_info(token):
             app_id = settings.FACEBOOK_APP_ID
-            app_secret_code = settings.FACEBOOK_APP_SECRET_CODE
+            app_secret_code = settings.FACEBOOK_SECRET_CODE
             app_access_token = f'{app_id}|{app_secret_code}'
 
             url_debug_token = 'https://graph.facebook.com/debug_token'
@@ -97,4 +92,5 @@ class FacebookLogin(APIView):
                 user_type=User.USER_TYPE_FACEBOOK,
             )
         # 유저 시리얼라이즈 결과를 Response
+
         return Response(UserSerializer(user).data)
