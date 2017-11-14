@@ -4,8 +4,16 @@ from member.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
 from member.models import User
-from post.models import Post, PostComment, PostLike
-from .forms import PostAddForm
+from ..models import Post, PostLike
+from ..forms import PostAddForm
+
+__all__ = (
+    'post_list',
+    'post_detail',
+    'post_add',
+    'post_delete',
+    'post_like',
+)
 
 
 def post_list(request):

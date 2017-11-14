@@ -2,56 +2,19 @@ from typing import NamedTuple
 
 import requests
 from django.conf import settings
-from django.contrib.auth import logout, login
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.http import JsonResponse
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View
 
-from member.forms import SignUpForm, LoginForm
-from member.models import User, Relationship
+from member.models import User
 
 
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            signed_up = True
-
-        else:
-            signed_up = False
-
-    else:
-        signed_up = False
-        form = SignUpForm()
-
-    context = {
-        'signed_up': signed_up,
-        'signup_form': form
-    }
-
-    return render(request, 'member/signup.html', context)
-
-
-def user_login(request):
-    next_url = request.GET.get('next')
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            form.login(request)
-            if next_url:
-                return redirect(next_url)
-            return redirect('post:post_list')
-    else:
-        form = LoginForm()
-    context = {
-        'login_form': form,
-        'facebook_app_id': settings.FACEBOOK_APP_ID,
-        'scope_fields': settings.FACEBOOK_SCOPE['scope'],
-    }
-    return render(request, 'member/login.html', context)
-
+__all__ = (
+    'facebook_login',
+    'FrontFacebookLogin',
+)
 
 def facebook_login(request):
     class AccessTokenInfo(NamedTuple):
@@ -233,29 +196,3 @@ class FrontFacebookLogin(View):
             'access_token': access_token,
         }
         return JsonResponse(data)
-
-
-def user_logout(request):
-    logout(request)
-    return redirect('post:post_list')
-
-
-def user_profile(request, pk):
-    all_users = User.objects.all().exclude(pk=request.user.pk)
-    user = User.objects.get(pk=pk)
-    context = {
-        'profile_user': user,
-        'all_users': all_users,
-    }
-    return render(request, 'member/profile.html', context)
-
-
-def follow_toggle(request, pk):
-    relation = Relationship.objects.filter(from_user=request.user, to_user=User.objects.get(pk=pk))
-    if relation.exists():
-        relation.delete()
-    else:
-        Relationship.objects.create(from_user=request.user,
-                                    to_user=User.objects.get(pk=pk))
-    url = request.META['HTTP_REFERER']
-    return redirect(url)
