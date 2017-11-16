@@ -209,3 +209,4 @@ credentials.csv
 !.elasticbeanstalk/*.global.yml
 
 !.config_secret/
+!.front/
