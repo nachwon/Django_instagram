@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from django.shortcuts import render, redirect
 
 
@@ -16,8 +16,9 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            signed_up = True
+            user = form.save()
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return redirect('post:post_list')
 
         else:
             signed_up = False
