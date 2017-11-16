@@ -1,4 +1,4 @@
-FROM        base
+FROM        nachwon/base
 MAINTAINER  nachwon@naver.com
 
 ENV         LANG C.UTF-8
