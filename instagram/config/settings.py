@@ -79,7 +79,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '.ap-northeast-2.compute.amazonaws.com',
     '.ap-northeast-2.elasticbeanstalk.com',
-    '.che1.kr',
+    '.che1.co.kr',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
