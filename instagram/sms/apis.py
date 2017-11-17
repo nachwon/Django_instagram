@@ -1,9 +1,12 @@
 import sys
 
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from sdk.api.message import Message
 from sdk.exceptions import CoolsmsException
+
+from utils.serializers import SMSSerializer
 
 
 class SendSMS(APIView):
@@ -11,6 +14,11 @@ class SendSMS(APIView):
     api_secret = "2ZNM5ZPZR07QHSLHVIFAH3XZR1GAGM2F"
 
     def post(self, request):
+        serializer = SMSSerializer(request.data)
+        if serializer.is_valid():
+            return Response(status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
         params = dict()
         params['type'] = 'sms'  # Message type ( sms, lms, mms, ata )
         params['to'] = '01064626406'  # Recipients Number '01000000000,01000000001'
