@@ -12,8 +12,8 @@ class PostList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericA
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (
-        # permissions.IsAuthenticatedOrReadOnly,
-        permissions.IsAuthenticated,
+        permissions.IsAuthenticatedOrReadOnly,
+        # permissions.IsAuthenticated,
     )
 
     def get(self, request, *args, **kwargs):
