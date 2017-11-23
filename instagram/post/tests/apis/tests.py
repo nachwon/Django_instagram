@@ -19,13 +19,13 @@ User = get_user_model()
 
 
 class PostListViewTest(APILiveServerTestCase):
-    URL_API_POST_LIST_NAME = 'post:api_post_list'
-    URL_API_POST_LIST = '/api/posts/'
+    URL_API_POST_LIST_NAME = 'api-post:post_list'
+    URL_API_POST_LIST = '/api/post/'
     VIEW_CLASS = PostList
 
     @staticmethod
     def create_user(username='dummy'):
-        return User.objects.create_user(username=username)
+        return User.objects.create_user(username=username, nickname='test')
 
     @staticmethod
     def create_post(author=None):
@@ -38,7 +38,7 @@ class PostListViewTest(APILiveServerTestCase):
 
     def test_post_list_url_resolve(self):
         resolve_match = resolve(self.URL_API_POST_LIST)
-        self.assertEqual(resolve_match.url_name, self.URL_API_POST_LIST_NAME)
+        self.assertEqual(resolve_match.view_name, self.URL_API_POST_LIST_NAME)
         self.assertEqual(resolve_match.func.view_class,
                          self.VIEW_CLASS)
 
@@ -53,10 +53,10 @@ class PostListViewTest(APILiveServerTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Post.objects.count(), num)
-        self.assertEqual(len(response.data), num)
+        self.assertEqual(response.data['count'], num)
 
-        for i in range(num):
-            cur_post_data = response.data[i]
+        for i in range(len(response.data['results'])):
+            cur_post_data = response.data['results'][i]
             self.assertIn('pk', cur_post_data)
             self.assertIn('author', cur_post_data)
             self.assertIn('photo', cur_post_data)
@@ -82,13 +82,11 @@ class PostListViewTest(APILiveServerTestCase):
         view = PostList.as_view()
         response = view(request)
 
-        print(response.data)
-
-        test_user = User.objects.get(pk=1)
+        test_user = User.objects.get(pk=6)
 
         self.assertEqual(response.data['content'], 'hello')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data['author'], test_user.pk)
+        self.assertEqual(response.data['author']['id'], test_user.pk)
         self.assertEqual(Post.objects.count(), 1)
 
         post = Post.objects.get(pk=response.data['pk'])
