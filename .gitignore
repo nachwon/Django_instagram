@@ -210,3 +210,6 @@ credentials.csv
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# Travis CI
+secrets.tar
