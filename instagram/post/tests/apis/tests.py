@@ -74,7 +74,7 @@ class PostListViewTest(APILiveServerTestCase):
     def test_api_post(self):
         factory = APIRequestFactory()
         user = self.create_user()
-        f = os.path.join(settings.MEDIA_ROOT, 'post', 'favicon.png')
+        f = os.path.join(settings.STATIC_DIR, 'favicon.png')
         with open(f, 'rb') as photo:
             request = factory.post('/api/posts/', {'content': 'hello', 'photo': photo})
         force_authenticate(request, user=user)
