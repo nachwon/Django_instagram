@@ -6,11 +6,13 @@ from utils import permissions as custom_permissions
 
 from post.models import Post, PostLike
 from post.serializer import PostSerializer
+from utils.pagination import PostPagination
 
 
 class PostList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    pagination_class = PostPagination
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
         # permissions.IsAuthenticated,
