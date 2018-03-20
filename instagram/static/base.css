@@ -127,17 +127,17 @@ li {
 
 
 .buttons .like-button {
-    background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/13cecc35f7af.png);
-    background-position: -208px -336px;
+    background-image: url(/static/icon-images.png);
+    background-position: -364px -479px;
 }
 .buttons .dislike-button {
-    background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/13cecc35f7af.png);
-    background-position: -182px -336px;
+    background-image: url(/static/icon-images.png);
+    background-position: -520px -479px;
 }
 
 .buttons .comment-button {
-    background-image: url(https://www.instagram.com/static/bundles/sprite_core.png/13cecc35f7af.png);
-    background-position: -355px -263px;
+    background-image: url(/static/icon-images.png);
+    background-position: -156px -479px;
 }
 
 .icon-wrapper {
