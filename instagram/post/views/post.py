@@ -1,4 +1,6 @@
 # from django.contrib.auth.decorators import login_required
+from itertools import chain
+
 from django.core.exceptions import PermissionDenied
 from member.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -23,8 +25,11 @@ def post_list(request):
         user_posts = user.post_set.all()
         following_users = user.following.all()
         for following_user in following_users:
-            user_posts = user_posts.union(following_user.post_set.all())
-        posts = user_posts.order_by('-created_date')
+            following_posts = following_user.post_set.all()
+            user_posts = chain(user_posts, following_posts)
+
+        result_list = sorted(user_posts, key=lambda instance: instance.created_date)
+        posts = list(result_list)[::-1]
         liked = user.postlike_set.all()
         like_list = [i.post_id for i in liked]
     else:
