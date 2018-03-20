@@ -55,6 +55,7 @@ def post_detail(request, pk):
         liked = user.postlike_set.all()
         liked_list = [i.post_id for i in liked]
     else:
+        all_users = None
         post = get_object_or_404(Post, pk=pk)
         user = request.user
         liked_list = None
